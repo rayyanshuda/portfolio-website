@@ -56,3 +56,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // Update the description every 4 seconds
     setInterval(updateDescription, 4000);
 });
+
+// Declare the variable once at the top of your script
+let lastScrollTop = 0;
+const navbar = document.getElementById('navbar');
+
+window.addEventListener("scroll", function() {
+    let st = window.scrollY || document.documentElement.scrollTop;
+    if (st > lastScrollTop) {
+        // Downscroll code
+        navbar.classList.add('hidden');
+    } else {
+        // Upscroll code
+        navbar.classList.remove('hidden');
+    }
+    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+});
