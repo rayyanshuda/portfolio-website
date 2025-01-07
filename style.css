@@ -13,17 +13,17 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 body {
-    
     background: #1A1A22;
     color: #fff; /*text color*/
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 #header {
     width: 100%;
     height: 100vh;
-    /*background-image: url(images/background2.png);*/
     background-size: cover;
     background-position: center;
 }
@@ -35,18 +35,43 @@ body {
     width: 100%;
     padding: 0 20px;*/
 }
-
+/*
 nav {
     display: flex; 
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     flex-wrap: wrap;
+    transition: top 0.3s;
+    z-index: 1000; /*z-index is used to stack elements on top of each other
+}
+*/
+
+#navbar {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Add padding to the navbar */
+    flex-wrap: wrap;
+    position:fixed; /* Fix the navbar to the top of the screen */
+    top: 0;
+    left: 170px;
+    right: 0px;
+    width: 80%;
+    background: linear-gradient(180deg, rgba(26, 26, 34, 0.8), rgba(26, 26, 34, 0)); /* Transparent gradient background */
+    /*use rgba(10, 10, 20, 0.9) for top darker background in the gradient*/
+    transition: top 0.5s;
+    z-index: 1000; /* Ensure the navbar is above other content */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#navbar.hidden {
+    top: -100px; /* Adjust this value based on the height of your navbar */
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 nav ul li {
@@ -209,7 +234,12 @@ strong {
     border-style: solid;
     border-color: #424A57;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s; /* Only transition box-shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for transform and box-shadow */
+}
+
+.work:hover {
+    transform: translateY(-10px); /* Translate up on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
 }
 
 .work img {
@@ -219,6 +249,14 @@ strong {
     border-radius: 10px 10px 0 0; /* rounded corners for the top */
     display: block;
     object-fit: cover; /* Ensure the image covers the container without distortion */
+    filter: grayscale(50%); /* Apply grayscale filter */
+    transition: transform 0.5s, filter 0.5s; /* Add transition for filter */
+    
+}
+
+.work:hover img {
+    transform: scale(1.1);
+    filter: grayscale(10%); /* Remove grayscale filter on hover */
 }
 
 .work-content {
@@ -312,12 +350,8 @@ strong {
 
 
 
-
 /*about section*/
-#about {
-    padding: 80px 0; /*top and bottom 80px, left and right 0*/
-    color: #ababab; /*text color*/
-}
+
 
 .row {
     display: flex; /*get all the divs in a row*/
@@ -325,117 +359,14 @@ strong {
     flex-wrap: wrap; /*if the screen is small, wrap the divs*/
 }
 
-.about-col-1 {
-    flex-basis: 35%; /*35% of the row*/
-}
 
-.about-col-1 img {
-    width: 100%; 
-    border-radius: 15px; /*rounded corners*/
-}
 
-.about-col-2 {
-    flex-basis: 60%; /*60% of the row*/
-}
 
 .sub-title {
     font-size: 40px;
     font-weight: 600;
     color:#fff;
 }
-
-.tab-titles {
-    display: flex;
-    margin: 20px 0 40px; /*top 20px, bottom 0, left and right 40px from bottom*/
-}
-
-.tab-links {
-    margin-right: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    position: relative;
-}
-
-.tab-links::after {
-    content: '';
-    width: 0%;
-    height: 3px;
-    background: #ff004f;
-    position: absolute;
-    left: 0;
-    bottom: -8px;
-    transition: 0.5s;
-}
-
-.tab-links.active-link::after {
-    width: 50%;
-}
-
-.tab-contents ul li {
-    list-style: none;
-    margin: 10px 0;
-}
-
-.tab-contents ul li span {
-    color: #b54769;
-    font-size: 14px;
-}
-
-.tab-contents {
-    display: none;
-}
-
-.tab-contents.active-tab {
-    display: block;
-}
-
-/*services section*/
-
-#services {
-    padding: 30px 0; /*top and bottom 30px, left and right 0*/
-}
-
-.services-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /*minimum 250px, maximum 1fr*/
-    grid-gap: 40px; /*space between the divs*/
-    margin-top: 50px;
-}
-
-.services-list div {
-    background: #262626; /*background color*/
-    padding: 40px;
-    font-size: 13px;
-    font-weight: 300;
-    border-radius: 10px; /*rounded corners*/
-    transition: background 0.5s, transform 0.5s;
-}
-
-.services-list div i {
-    font-size: 50px;
-    margin-bottom: 30px;
-}
-
-.services-list div h2 {
-    font-size: 30px;
-    font-weight: 500;;
-    margin-bottom: 15px;
-}
-
-.services-list div a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 12px;
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.services-list div:hover {
-    background: #ff004f;
-    transform: translateY(-10px);
-}
-
 
 /*contact section*/
 
@@ -463,7 +394,7 @@ strong {
 
 .social-icons a {
     text-decoration: none;
-    font-size: 30px;
+    font-size: 36px;
     margin-right: 15px;
     color: #ababab;
     display: inline-block;
@@ -482,36 +413,48 @@ strong {
 
 .contact-right form {
     width: 100%;
+    display: flex;
+    flex-direction: column; /* Ensure the form elements are in a column layout */
+    align-items: flex-start; /* Align items to the left */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 form input, form textarea {
-    width: 100%;
-    padding: 15px 15px;
-    margin: 10px;
+    width: calc(100% - 30px); /* Adjust width to account for padding */
+    padding: 15px;
+    margin: 10px 0; /* Adjust margin to avoid horizontal spacing */
     border: 0;
     outline: none;
     background: #262626;
     color: #fff;
     font-size: 18px;
-    border-radius: 6px; /*when you drag the icon to make the message bigger, it amkes the contact msg disappear*/
+    border-radius: 6px; /*when you drag the icon to make the message bigger, it makes the contact msg disappear*/
     resize: vertical;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 form .btn2 {
-    padding: 15px 60px;
-    margin-top: 20px;
-    margin-left: 10px;
-    font-size: 18px;
+    width: calc(100% - 30px); /* Adjust width to account for padding */
+    padding: 15px;
+    margin: 10px 0; /* Ensure the margin matches the input fields */
+    font-size: 18px; /* Ensure the font size matches the input fields */
     cursor: pointer;
+    background: #ff004f; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 6px; /* Ensure the border radius matches the input fields */
+    text-align: center;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.copyright {
+form input, form textarea {
+    letter-spacing: 1px;
+}
+
+form button {
     width: 100%;
     text-align: center;
-    padding: 25px 0;
-    background: #262626;
-    font-weight: 300;
-    margin-top: 20px;
+    letter-spacing: 1px;
 }
 
 /* Footer */
@@ -525,24 +468,25 @@ footer {
 }
 
 
+
+
+
 /*css for small screens*/
 
 nav .fa-solid {
     display: none;
 }
-
 @media only screen and (max-width: 600px) {
     .logo {
         width: 50px;
         height: 50px;
     }
-    
-    .header-text {
-        margin-top: 100%;
-        font-size: 16px;
-    }
-    .header-text h1 {
-        font-size: 30px;
+
+    nav {
+        display: flex; 
+        justify-content: flex-start; /* Aligns items to the left */
+        align-items: center; /* Centers items vertically */
+        padding: 10px; /* Add padding for better spacing */
     }
 
     nav .fa-solid {
@@ -554,7 +498,7 @@ nav .fa-solid {
         background: #ff004f;
         position: fixed;
         top: 0;
-        right: -200px; /*move to the right side and become hidden*/
+        right: -200px; /* Hidden off-screen initially */
         width: 200px;
         height: 100vh;
         padding-top: 50px;
@@ -575,32 +519,127 @@ nav .fa-solid {
         cursor: pointer;
     }
 
+    .header-text {
+        margin-top: 40%;
+        font-size: 16px;
+    }
+
+    .header-text h1 {
+        font-size: 36px;
+    }
+
+    .fade {
+        min-height: 110px; /* Set a minimum height between the next text below*/
+    }
+
+    .intro {
+        font-size: 16px;
+        line-height: 30px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
     .sub-title {
         font-size: 40px;
     }
-    .about-col-1, .about-col-2 {
-        flex-basis: 100%;
+
+    .work {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 450px; /* Allow the height to adjust based on content */
     }
 
-    .about-col-1 {
-        margin-bottom: 30px;
+    .work img {
+        height: auto; /* Adjust based on the parent's width */
+        max-height: 50%; /* Ensure the image does not exceed 55% of the container's height */
+        width: 100%; /* Maintain full width */
+        object-fit: cover; /* Prevent distortion */
+        overflow-x: hidden;
+        overflow-y: hidden;
     }
 
-    .about-col-2 {
-        font-size: 14px;
+    .work-content {
+        flex: 1;
+        padding: 20px;
+        padding-bottom: 10px; /* Reduce padding at the bottom */
     }
 
-    .tab-links {
-        font-size: 16px;
-        margin-right: 20px;
+    .tags-container {
+        padding-top: 5px;
+        display: flex;
+        flex-wrap: wrap; /* Allow tags to wrap to the next line */
+        gap: 5px; /* Reduce space between tags */
+    }
+
+    .tag {
+        padding: 3px 8px; /* Reduce padding for smaller screens */
+        margin: 1px 1px;
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .work-list {
+        grid-template-columns: repeat(1, 1fr); /* Single column for small screens */
+    }
+
+    .dimension {
+        padding: 35px 0;
+        display: none;
+    }
+
+    #projects .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px; /* Space between grid items */
     }
 
     .contact-left, .contact-right {
         flex-basis: 100%;
     }
 
-    .copyright {
-        font-size: 14px;
+    .contact-right form {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
     }
 
+    form input, form textarea {
+        width: 100%;
+        padding: 12px 10px;
+        margin: 7px auto;
+        font-size: 16px;
+    }
+
+    form .btn2 {
+        width: 100%;
+        padding: 10px 40px;
+        font-size: 16px;
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: center; /* Center the icons horizontally */
+        align-items: center; /* Center the icons vertically */
+        gap: 10px; /* Add space between the icons */
+        margin: 10px 0;
+    }
+    
+    .social-icons a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 36px;
+        padding: 10px 0;
+        text-decoration: none; /* Remove underline from links */
+    }
+
+
+    footer {
+        margin: 10px 20px; /* Reduce margin for small screens */
+        width: auto; /* Allow the width to adjust automatically */
+        letter-spacing: 1px;
+    }
 }
