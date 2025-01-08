@@ -23,7 +23,7 @@ body {
 }
 #header {
     width: 100%;
-    height: 100vh;
+    height: 85vh;
     background-size: cover;
     background-position: center;
 }
@@ -47,22 +47,30 @@ nav {
 }
 */
 
+/* Navbar styles */
 #navbar {
     display: flex; 
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px; /* Add padding to the navbar */
     flex-wrap: wrap;
-    position:fixed; /* Fix the navbar to the top of the screen */
+    position: fixed; /* Fix the navbar to the top of the screen */
     top: 0;
-    left: 170px;
-    right: 0px;
-    width: 80%;
+    right: 0;
+    width: 100%;
     background: linear-gradient(180deg, rgba(26, 26, 34, 0.8), rgba(26, 26, 34, 0)); /* Transparent gradient background */
-    /*use rgba(10, 10, 20, 0.9) for top darker background in the gradient*/
     transition: top 0.5s;
     z-index: 1000; /* Ensure the navbar is above other content */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+#navbar .container2 {
+    max-width: 1170px; /* Set a maximum width for the container */
+    width: 100%;
+    margin: 0 auto; /* Center the container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #navbar.hidden {
@@ -72,24 +80,30 @@ nav {
 .logo {
     width: 80px;
     height: 80px;
+    margin-right: auto;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 nav ul li {
-    list-style: none;
-    display: inline-block;
     margin: 10px 20px;
 }
 
 nav ul li a {
     color: #fff;
-    text-decoration: none; /*remove underline*/
+    text-decoration: none; /* Remove underline */
     font-size: 18px;
     position: relative;
 }
 
 nav ul li a::after {
     content: '';
-    width: 0%;
+    width: 0;
     height: 3px;
     background: #ff004f;
     position: absolute;
@@ -100,7 +114,7 @@ nav ul li a::after {
 
 nav ul li a:hover::after {
     width: 100%;
-    transition: 0.5s;
+    transition: width 0.5s ease;
 }
 .header-text {
     margin-top: 12%;
@@ -224,6 +238,10 @@ strong {
     background-color: #1A1A22;
 }
 
+.work-list a {
+    text-decoration: none;
+}
+
 .work {
     width: 350px;
     height: 525px;
@@ -261,8 +279,6 @@ strong {
 
 .work-content {
     padding: 20px;
-    /*outline-style: solid;*/
-    /*outline-color: #424A57;*/
     background-color: #1A1A22;
 }
 
@@ -297,10 +313,6 @@ strong {
 .work p {
     margin: 0;
     color: #666;
-}
-
-.work:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Only change box-shadow on hover */
 }
 
 .layer {
@@ -341,25 +353,11 @@ strong {
     background: #ff004f;
 }
 
-
-
-
-
-
-
-
-
-
-/*about section*/
-
-
 .row {
     display: flex; /*get all the divs in a row*/
     justify-content: space-between; /*space between the divs*/
     flex-wrap: wrap; /*if the screen is small, wrap the divs*/
 }
-
-
 
 
 .sub-title {
@@ -452,7 +450,8 @@ form input, form textarea {
 }
 
 form button {
-    width: 100%;
+    width: calc(100% - 30px); /* Adjust width to account for padding */
+    padding: 15px;
     text-align: center;
     letter-spacing: 1px;
 }
@@ -480,43 +479,37 @@ nav .fa-solid {
     .logo {
         width: 50px;
         height: 50px;
+        position: relative;
     }
 
     nav {
-        display: flex; 
-        justify-content: flex-start; /* Aligns items to the left */
-        align-items: center; /* Centers items vertically */
-        padding: 10px; /* Add padding for better spacing */
-    }
-
-    nav .fa-solid {
-        display: block;
-        font-size: 25px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%; /* Full width */
+        z-index: 1000; /* Ensure it's above other content */
     }
 
     nav ul {
-        background: #ff004f;
-        position: fixed;
-        top: 0;
-        right: -200px; /* Hidden off-screen initially */
-        width: 200px;
-        height: 100vh;
-        padding-top: 50px;
-        z-index: 2;
-        transition: right 0.5s;
+        flex-direction: row; /* Stack items vertically */
+        align-items: flex-start; /* Align items to the left */
+        padding-left: 20px;
     }
 
     nav ul li {
-        display: block;
-        margin: 25px;
-        text-align: center;
+        margin: 10px 0;
+        text-align: left; /* Align text to the left */
     }
 
-    nav ul .fa-solid {
-        position: absolute;
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
+    nav ul li a {
+        font-size: 16px; /* Adjust font size for small screens */
+        padding: 10px;
+    }
+
+    nav ul li a::after {
+        width: 0; /* Remove underline effect */
+        transition: none; /* Remove transition effect */
+        content: none; /* Remove the line */
     }
 
     .header-text {
@@ -541,6 +534,10 @@ nav .fa-solid {
         font-size: 18px;
     }
 
+    #projects .sub-title {
+        margin-top: 70px;
+    }
+
     .sub-title {
         font-size: 40px;
     }
@@ -550,6 +547,8 @@ nav .fa-solid {
         display: flex;
         flex-direction: column;
         height: 450px; /* Allow the height to adjust based on content */
+        transition: none; /* Remove transition */
+        transform: none;
     }
 
     .work img {
@@ -559,12 +558,35 @@ nav .fa-solid {
         object-fit: cover; /* Prevent distortion */
         overflow-x: hidden;
         overflow-y: hidden;
+        filter: grayscale(30%);
+        transition: none;
+        transform: none;
     }
+
+    .work:hover {
+        transform: none; /* Remove hover transform */
+        box-shadow: none; /* Remove hover shadow */
+    }
+
+    .work:hover img {
+        transform: none; /* Remove hover transform */
+        filter: grayscale(30%); /* Keep grayscale consistent */
+    }
+
 
     .work-content {
         flex: 1;
         padding: 20px;
         padding-bottom: 10px; /* Reduce padding at the bottom */
+        transition: none;
+        transform: none;
+        translate: none;
+    }
+
+    .work a {
+        transition: none;
+        transform: none;
+        translate: none;
     }
 
     .tags-container {
@@ -582,6 +604,9 @@ nav .fa-solid {
 
     .work-list {
         grid-template-columns: repeat(1, 1fr); /* Single column for small screens */
+        transition: none;
+        transform: none;
+        translate: none;
     }
 
     .dimension {
@@ -643,3 +668,252 @@ nav .fa-solid {
         letter-spacing: 1px;
     }
 }
+
+/* Tablets (601px to 1024px) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    nav {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+    }
+
+    nav ul {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: auto;
+        background: none;
+        display: flex;
+        gap: 20px; /* Add spacing between menu items */
+    }
+
+    nav ul li {
+        margin: 0 10px;
+        text-align: left;
+    }
+
+    .fade {
+        min-height: 145px; /* Set a minimum height between the next text below*/
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    #header {
+        height: 80vh;
+    }
+
+    #projects {
+        margin: 0;
+        padding: 0;
+    }
+
+    .intro {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .header-text {
+        margin-top: 20%;
+        font-size: 18px;
+    }
+
+    .header-text h1 {
+        font-size: 48px;
+    }
+
+    .work {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 350px;
+    }
+
+    .work img {
+        height: auto; /* Adjust based on the parent's width */
+        max-height: 50%; /* Ensure the image does not exceed 55% of the container's height */
+        width: 100%; /* Maintain full width */
+        object-fit: cover; /* Prevent distortion */
+        overflow-x: hidden;
+        overflow-y: hidden;
+        overflow-clip-margin: content-box;
+    }
+
+    .work-content h3 {
+        font-size: 20px;
+    }
+
+    .tags-container {
+        padding-top: 5px;
+        display: flex;
+        flex-wrap: wrap; /* Allow tags to wrap to the next line */
+        gap: 5px; /* Reduce space between tags */
+    }
+
+    .tag {
+        padding: 3px 8px; /* Reduce padding for smaller screens */
+        margin: 1px 1px;
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .work-list {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for tablets */
+        grid-gap: 20px;
+    }
+
+    .work-content {
+        flex: 1;
+        padding: 20px;
+        padding-bottom: 10px; /* Reduce padding at the bottom */
+    }
+
+    .dimension {
+        padding: 35px 0;
+        display: none;
+    }
+
+    .contact-left {
+        margin-left: 20px;
+    }
+
+
+    .contact-left, .contact-right {
+        flex-basis: 45%;
+        min-height: 500px;
+    }
+
+    form input, form textarea {
+        width: 90%;
+    }
+
+
+    form .btn2 {
+        width: 90%;
+    }
+
+    .social-icons {
+        gap: 15px;
+        font-size: 28px;
+    }
+
+    footer {
+        margin: 20px 40px;
+    }
+}
+
+
+/* Laptops and Small Desktops (1025px to 1440px) */
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
+    nav {
+        padding: 20px;
+    }
+
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+        gap: 30px;
+    }
+
+    nav ul li {
+        margin: 0;
+        font-size: 18px;
+    }
+
+    .header-text {
+        margin-top: 15%;
+        font-size: 24px;
+    }
+
+    .header-text h1 {
+        font-size: 48px;
+    }
+
+    .intro {
+        margin-top: 1%;
+        font-size: 20px;
+        line-height: 36px;
+    }
+
+    .work {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+    }
+
+    .work img {
+        height: auto; /* Adjust based on the parent's width */
+        max-height: 50%; /* Ensure the image does not exceed 55% of the container's height */
+        width: 100%; /* Maintain full width */
+        object-fit: cover; /* Prevent distortion */
+        overflow-x: hidden;
+        overflow-y: hidden;
+        overflow-clip-margin: content-box;
+    }
+
+    .work-content h3 {
+        font-size: 20px;
+    }
+
+    .tags-container {
+        padding-top: 5px;
+        display: flex;
+        flex-wrap: wrap; /* Allow tags to wrap to the next line */
+        gap: 5px; /* Reduce space between tags */
+    }
+
+    .tag {
+        padding: 3px 8px; /* Reduce padding for smaller screens */
+        margin: 1px 1px;
+        font-size: 14px; /* Reduce font size for smaller screens */
+    }
+
+    .work-list {
+        grid-template-columns: repeat(3, 1fr); /* Two columns for tablets */
+        grid-gap: 20px;
+    }
+    
+
+    .work-content {
+        flex: 1;
+        padding: 20px;
+        padding-bottom: 10px; /* Reduce padding at the bottom */
+    }
+
+    .dimension {
+        padding: 35px 0;
+        display: none;
+    }
+
+    .contact-left, .contact-right {
+        flex-basis: 45%;
+    }
+
+    form input, form textarea {
+        width: 80%;
+    }
+
+    form .btn2 {
+        width: 80%;
+    }
+
+    .social-icons {
+        gap: 20px;
+        font-size: 30px;
+    }
+
+    footer {
+        margin: 30px 60px;
+        font-size: 16px;
+    }
+}
+
+
