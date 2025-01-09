@@ -12,15 +12,30 @@
   }
 
 html {
+    background: #1A1A22;
     scroll-behavior: smooth;
     overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 body {
-    background: #1A1A22;
-    color: #fff; /*text color*/
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    background: #1A1A22; /* Background color */
+    color: #fff; /* Text color */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
 }
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    80% {
+        opacity: 1;
+    }
+}
+
 #header {
     width: 100%;
     height: 85vh;
@@ -488,7 +503,13 @@ footer {
     font-size: 18px;
 }
 
-
+#about-section {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    justify-content: space-between; /* Space items evenly */
+    align-items: center; /* Center items vertically */
+    gap: 20px; /* Add space between items */
+}
 
 .debut {
     flex-basis: 45%; /*60% of the row*/
@@ -503,8 +524,8 @@ footer {
 }
 
 .picture img {
-    width: 95%;
-    height: 90%;
+    width: 100%;
+    height: auto;
     object-fit: cover;
     border-radius: 10px;
 }
