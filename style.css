@@ -366,6 +366,9 @@ strong {
     color:#fff;
 }
 
+
+
+
 /*contact section*/
 
 .contact-left {
@@ -388,6 +391,7 @@ strong {
 
 .social-icons {
     margin-top: 30px;
+    min-height: 100px;
 }
 
 .social-icons a {
@@ -459,13 +463,133 @@ form button {
 /* Footer */
 footer {
     bottom: 0;
-    margin-top: 50px;
+    margin-top: 150px;
     padding-bottom: 50px;
     font-size: 14px;
     text-align: center;
     letter-spacing: 2px;
 }
 
+
+/*css for about.html webpage*/
+
+.name {
+    margin-top: 12%;
+    font-size: 30px;
+}
+
+.name h1 {
+    font-size: 60px;
+    margin-top: 20px;
+}
+
+.about-text {
+    line-height: 40px;
+    font-size: 18px;
+}
+
+
+
+.debut {
+    flex-basis: 45%; /*60% of the row*/
+}
+
+.picture {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 45%; /*35% of the row*/
+}
+
+.picture img {
+    width: 95%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.picture p {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.debut p {
+    margin-top: 50px;
+}
+
+.debut p i {
+    color: #ff004f;
+    margin-right: 15px;
+    font-size: 25px;
+}
+
+.picture {
+    margin-top: 20px;
+}
+
+
+
+
+
+
+.about-col-2 {
+    flex-basis: 60%; /*60% of the row*/
+}
+
+.sub-title {
+    font-size: 60px;
+    font-weight: 600;
+    color:#fff;
+}
+
+.tab-titles {
+    display: flex;
+    margin: 20px 0 40px; /*top 20px, bottom 0, left and right 40px from bottom*/
+}
+
+.tab-links {
+    margin-right: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-links::after {
+    content: '';
+    width: 0%;
+    height: 3px;
+    background: #ff004f;
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    transition: 0.5s;
+}
+
+.tab-links.active-link::after {
+    width: 50%;
+}
+
+.tab-contents ul li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.tab-contents ul li span {
+    color: #b54769;
+    font-size: 14px;
+}
+
+.tab-contents {
+    display: none;
+}
+
+.tab-contents.active-tab {
+    display: block;
+}
 
 
 
