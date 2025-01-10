@@ -551,6 +551,10 @@ footer {
     margin-top: 20px;
 }
 
+.picture p {
+    color: #BBBBBD;
+}
+
 
 
 
@@ -807,8 +811,54 @@ nav .fa-solid {
     }
 
 
+
+
+
+
+
+    /*small screen css for about.html webpage*/
+
+    .name {
+        margin-top: 12%;
+        font-size: 30px;
+    }
+
+    .name h1 {
+        font-size: 40px;
+        margin-top: 120px;
+    }
+
+    .about-text {
+        flex-basis: 100%;
+        line-height: 30px;
+        font-size: 16px;
+    }
+
+    .debut { /*about-text with social icons*/
+        flex-basis: 100%; /*60% of the row*/
+    }
+
+    .picture {
+        flex-basis: 100%; /*35% of the row*/
+    }
+
+    .picture img {
+        width: 100%;
+        height: auto;
+    }
+
+    .debut p {
+        margin-top: 50px;
+    }
+
+    .picture {
+        margin-top: 20px;
+    }
+
+
+
     footer {
-        margin: 10px 20px; /* Reduce margin for small screens */
+        margin: 60px 20px 0 20px; /* Reduce margin for small screens */
         width: auto; /* Allow the width to adjust automatically */
         letter-spacing: 1px;
     }
@@ -947,11 +997,58 @@ nav .fa-solid {
     .social-icons {
         gap: 15px;
         font-size: 28px;
+        display: flex;
+        justify-content: center;
     }
 
-    footer {
-        margin: 20px 40px;
+    .name {
+        margin-top: 12%;
+        font-size: 30px;
     }
+
+    .name h1 {
+        font-size: 40px;
+        margin-top: 120px;
+    }
+
+    .about-text {
+        flex-basis: 100%;
+        line-height: 30px;
+        font-size: 16px;
+    }
+
+    .debut { /*about-text with social icons*/
+        flex-basis: 100%; /*60% of the row*/
+    }
+
+    .picture {
+        flex-basis: 100%; /*35% of the row*/
+    }
+
+    .picture img {
+        width: 100%;
+        height: auto;
+    }
+
+    .debut p {
+        margin-top: 50px;
+    }
+
+    .picture {
+        margin-top: 20px;
+    }
+
+    
+
+
+
+    footer {
+        margin: 60px 40px 0 40px; /* Reduce margin for small screens */
+        width: auto; /* Allow the width to adjust automatically */
+        letter-spacing: 1px;
+    }
+
+    
 }
 
 

@@ -72,6 +72,9 @@ function topFunction() {
   behavior: 'smooth';
 }
 
+/*
+new edits
+
 $(document).ready(function() {
     // Fade in the body once the page content is fully loaded
     $('body').fadeIn(1500); // 1.5 seconds fade-in effect
@@ -81,7 +84,7 @@ $(document).ready(function() {
         var link = $(this).attr('href');
 
         // Check if the link is an internal link (relative path)
-        if (!link.startsWith('http') && !link.startsWith('www')) {
+        if (!link.startsWith('http') && !link.startsWith('www') && !link.startsWith('images')) {
             event.preventDefault(); // Prevent the default navigation
 
             // Fade out the current page content instantly
@@ -98,6 +101,7 @@ $(document).ready(function() {
         // External links will open as usual in a new tab
     });
 });
+*/
 
 
 
