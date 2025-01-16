@@ -619,6 +619,25 @@ footer {
 
 
 
+.name {
+    margin-top: 12%;
+    font-size: 30px;
+}
+
+.name h1 {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.name h1 span {
+    color: #e10047;
+    font-size: 45px;;
+}
+
+
+/* Media Queries */
+
+
 /*css for small screens*/
 
 nav .fa-solid {
