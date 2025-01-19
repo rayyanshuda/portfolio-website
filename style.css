@@ -24,6 +24,7 @@ body {
     animation: fadeInAnimation ease 2s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    margin-top: 10%;
 }
 
 @keyframes fadeInAnimation {
@@ -132,7 +133,6 @@ nav ul li a:hover::after {
     transition: width 0.5s ease;
 }
 .header-text {
-    margin-top: 12%;
     font-size: 30px;
 }
 
@@ -284,7 +284,6 @@ strong {
     object-fit: cover; /* Ensure the image covers the container without distortion */
     filter: grayscale(50%); /* Apply grayscale filter */
     transition: transform 0.5s, filter 0.5s; /* Add transition for filter */
-    
 }
 
 .work:hover img {
@@ -489,7 +488,6 @@ footer {
 /*css for about.html webpage*/
 
 .name {
-    margin-top: 12%;
     font-size: 30px;
 }
 
@@ -618,6 +616,238 @@ footer {
 
 
 
+
+.heading {
+    display: flex; /* Enable flexbox */
+    justify-content: space-between; /* Space out content (title and button) */
+    align-items: flex-start; /* Align items at the top initially */
+    padding: 10px 20px; /* Add padding for spacing */
+}
+
+.project-title {
+    margin-top: 0; /* Remove unnecessary margin from the container */
+}
+
+.project-title h1 {
+    font-size: 30px;
+    margin: 0; /* Remove top margin to avoid unnecessary spacing */
+}
+
+.project-title h1 span {
+    font-size: 45px;
+    color: #ff004f;
+}
+
+.view {
+    padding: 10px 20px; /* Button padding */
+    font-size: 16px;
+    /* background-color: #007bff; Button background color */
+    background-color: #ff004f;
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    align-self: center; /* Center button vertically within its flex container */
+    margin-top: 30px; /* Add vertical space from the top */
+    margin-right: 60px;
+}
+
+.view:hover {
+    /*background-color: #0056b3;  Darker color on hover */
+    background-color: #db0045;
+}
+
+
+
+
+
+.project-description {
+    margin-top: 45px;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.project-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-image img {
+    width: 60%;
+    display:inline-block;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 40px 0;
+}
+
+.project-overview {
+    margin-top: 35px;
+    line-height: 40px;
+}
+
+.project-overview h2 {
+    color: #ff004f;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.collapsible-item h2 {
+    margin-top: 20px;
+}
+
+.project-overview p {
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.project-features {
+    margin-top: 25px;
+    line-height: 40px;
+    padding-bottom: 50px; 
+}
+
+
+.project-features h3 {
+    font-size: 20px;
+}
+
+code {
+    font-family: 'Courier New', monospace;
+    color: white;
+    font-weight: 500;
+    background-color: #282835;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 6px;
+    font-size: 105%;
+}
+
+.project-features ul {
+    margin-top: 15px;
+    text-indent: 1%;
+    list-style: disc inside;
+}
+
+.project-features p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.collapsible-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+/* First button in the list */
+.collapsible:first-child {
+    border-style: solid;
+    border-color: #424A57;
+    border-width: 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+  
+  /* Last button in the list */
+.collapsible:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: #1A1A22;
+    border-style: solid;
+    border-color: #424A57;
+    border-width: 2px;
+    border-top: none;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Add transition for background color */
+    display: flex; /* Enable flexbox */
+    align-items: center; /* Vertically align the text and arrow */
+}
+
+
+.collapsible.active {
+    border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+  
+.collapsible:hover {
+    background-color: #ff004f;
+}
+
+
+.collapsible:before {
+    content: ''; /* Set empty content for the image */
+    background-image: url('images/right-arrow.png'); /* Path to your image */
+    background-size: contain; /* Scale the image to fit */
+    background-repeat: no-repeat; /* Prevent image repetition */
+    width: 25px;
+    height: 25px;
+    filter: invert(1); /* Optional, to invert the image color */
+    margin-right: 10px; /* Space between the image and text */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for rotation */
+}
+
+/* When collapsible is active, rotate the arrow by 90 degrees */
+.collapsible.active:before {
+    transform: rotate(90deg); /* Rotate 90 degrees clockwise */
+}
+
+
+.expand {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #1A1A22;
+}
+
+.expand.active {
+    border-style: solid;
+    border-color: #424A57;
+    border-top: none;
+}
+
+
+.no-bullet-point {
+    list-style: none;
+    text-indent: 3%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+/*
+li { 
+    padding-left: 2em; 
+}
+*/
+
+ul ul ul,
+ul ul {
+    margin-left: 20px; /* Maintain indentation for nested lists */
+}
+
+ul ul ul li {
+    list-style-type: square; /* Apply square bullets to the deepest nested list */
+}
+
+ul ul li {
+    list-style-type: circle; /* Apply circle bullets to second-level nested lists */
+}
 
 
 /* Media Queries */

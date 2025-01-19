@@ -103,6 +103,25 @@ $(document).ready(function() {
 });
 */
 
+var coll = document.getElementsByClassName("collapsible");
+
+for (var i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    // Toggle active class for the button
+    this.classList.toggle("active");
+
+    // Handle expand content
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+      content.classList.remove("active"); // Remove active class for border
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      content.classList.add("active"); // Add active class for border
+    }
+  });
+}
+
 
 
 

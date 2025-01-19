@@ -33,22 +33,415 @@
     </nav>
     </div>
 
-<div id="project-description">
+<div id="project-content">
     <div class="container">
-        <div class="project-title">
-            <h1>
-                <span>Library Management System</span>
-                <br>
-                Managing Books, Libraries, and Users
-            </h1>
+        <div class="heading">
+            <div class="project-title">
+                <h1>
+                    <span>Library Management System</span>
+                    <br>
+                    Managing Books, Libraries, and Users
+                </h1>
+            </div>
+            <a href="https://github.com/rayyanshuda/library" target="_blank" rel="noopener noreferrer">
+                <button class="view">View GitHub</button>
+            </a>
         </div>
+
+
         <div class="row">
-            <div class="about-text">
-                <p>testing</p>
+            <div class="project-description">
+                <p>
+                    This project is a comprehensive implementation of a Library System written in C++. 
+                    The system is designed to manage books, library users, and their interactions through an intuitive 
+                    driver code that serves as the user interface. It provides an adequate foundation for 
+                    managing a library's operations and can be extended with additional features.
+                </p>
+            </div>
+            <div class="project-image">
+            <img src="images/library-system-intro-pic4.png" alt="code preview from the library system project">
             </div>
         </div>
     </div>        
 </div>
+
+<div class="project-overview">
+    <div class="container">
+        <h2>Why This Project?</h2>
+        <p>
+            This project was built to explore and apply advanced C++ programming concepts in a real-world context. 
+            It simulates a functional library system while showcasing coding best practices and modular design.
+        </p>
+        <p>
+            I wanted to challenge my learning and encorporate different concepts of my knowledge to showcase my skills. 
+            I picked this project because it provides a solution to a real-world system; storing books, and library user information.
+            Some next steps to evolve this project, could be to integrate a graphical interface, and creating different inherit (sub-class) users
+            with their own special attributes.
+        </p>
+
+        <h2>What did I learn?</h2>
+        <p>
+            This project provided a learning curve to my programming skillset, constantly challenging me to learn new concepts
+            and finding more efficient solutions to the methods I created. By no means is my development strategy the most optimal, it is simply one method
+            to create a library management system. I learned how to implement object-oriented programming principles, manage memory effectively, 
+            and apply advanced C++ concepts, including inheritance, polymorphism, encapsulation, and data abstraction.
+
+        </p>
+
+        <p>
+            To showcase my learning, you can view my implementation of books, a library system, and library users and their respective attributes, constructors,
+            and methods. You can find more information about this project on my Github.
+        </p>
+        <div class="collapsible-item">
+            
+            <!--book class-->
+            <button type="button" class="collapsible">Book Class</button>
+            <div class="expand">
+                <div class="project-features">
+                    <!--
+                    <h3>Book Class</h3>
+                        <ul>
+                            <li>Represents data of individual books in the library.</li>
+                            <li>Stores book information such as<code>title</code>, <code>author</code>, <code>genre</code>, and <code>year_published</code>.</li>
+                        </ul>
+                        <br>
+                    -->
+                        <h1>Class Book</h1>
+                        <h2>Attributes</h2>
+                        <code>Title</code>, <code>Author</code>, <code>Genre</code>, <code>Year_Published</code>
+                        <br>
+                        <h2>Methods</h2>
+                        
+                        <h3>Constructors</h3>
+                        <ul>
+                        <li><strong>Default Constructor:</strong><br>
+                            The default constructor sets all three attributes (title, author, genre) to <code>"n/a"</code>.</li>
+                        
+                        <li><strong>Parameterized Constructors:</strong><br>
+                            Initializes one, two, or more attributes (title, author, genre, and year published) using the parameterized constructors. 
+                            Any attributes not initialized will be set to <code>"n/a"</code>.</li>
+                        </ul>
+                        
+                        <h3><code>get_title()</code></h3>
+                        <ul>
+                        <li>Returns the title of the book.</li>
+                        </ul>
+                        
+                        <h3><code>get_author()</code></h3>
+                        <ul>
+                        <li>Returns the author of the book.</li>
+                        </ul>
+                        
+                        <h3><code>get_genre()</code></h3>
+                        <ul>
+                        <li>Returns the genre of the book.</li>
+                        </ul>
+                        
+                        <h3><code>get_year_published()</code></h3>
+                        <ul>
+                        <li>Returns the year the book was published.</li>
+                        </ul>
+                        
+                        <h3><code>operator==</code></h3>
+                        <ul>
+                        <li>Implements equality operator overloading to compare two <code>Book</code> objects.<br></li>
+                        <li>Two books are considered equal if their attributes (title, author, genre, year published) are the same.</li>
+                        <li><strong>Use:</strong> Prevent duplicate addition of a book to the library.</li>
+                        </ul>
+                        
+                        <h3><code>print()</code></h3>
+                        <ul>
+                        <li>Outputs the current values stored inside the <code>Book</code> object.</li>
+                        </ul>
+                </div>
+            </div>
+
+
+            <!--library class-->
+            <button type="button" class="collapsible">Library Class</button>
+            <div class="expand">
+                <div class="project-features">
+                    <!--
+                    <h3>Book Class</h3>
+                        <ul>
+                            <li>Represents data of individual books in the library.</li>
+                            <li>Stores book information such as<code>title</code>, <code>author</code>, <code>genre</code>, and <code>year_published</code>.</li>
+                        </ul>
+                        <br>
+                    -->
+                        <h1>Class Library</h1>
+                        <h2>Attributes</h2>
+                        <p>
+                            Vector of <code>Book Object Pointers</code> <br>
+                            Vector of <code>Is_Borrowed</code>
+                        </p>
+                        <h2>Methods</h2>
+                        
+                        <h3>Constructors</h3>
+                        <ul>
+                        <li><strong>Default Constructor:</strong><br>
+                            The default constructor with no parameters implicitly initializes the vector attribute.</li>
+                        
+                        <li><strong>Parameterized Constructors:</strong><br>
+                            The parametric constructor takes a vector of Book objects pointer and 
+                            stores the Book values from that vector into the vector attribute.</li>
+                        </ul>
+                        
+                        <h3><code>Insertion</code></h3>
+                        <ul>
+                        <li>Insertion (Book Pointer):</li>
+                        <li class="no-bullet-point">This method takes a pointer to a <code>Book</code> object and stores it in the library's vector. The <code>is_borrowed</code> vector is adjusted accordingly.</li>
+                        <li class="no-bullet-point"><strong>Checks:</strong> The method will check if a book with the exact same details (title, author, genre, year published) already exists in the library using the overloaded equality operator (<code>operator==</code>).</li>
+                        </ul>
+                        
+                        <h3><code>Removal</code></h3>
+                        <ul>
+                            <li>Removal (Book Pointer):</li>
+                            <li class="no-bullet-point">This method accepts a pointer to a <code>Book</code> object and removes the corresponding book from the library.
+                              <ul>
+                                <li>If the book is found and removed, the method returns true and adjusts the <code>is_borrowed</code> vector.</li>
+                                <li>If the book is not found, it returns <code>false</code>.</li>
+                              </ul>
+                            </li>
+                        </ul>
+                          
+
+                        <h3><code>Advanced Search</code></h3>
+                        <ul>
+                            <li>Advanced Search (Substring Math):</li>
+                            <li class="no-bullet-point">This method searches for books in the library based on substrings of title, author, and genre. 
+                                It takes input strings for title, author, and genre, which can be partial matches.
+                              <ul>
+                                <li>If a match is found, the book information is printed using the <code>book->print()</code> method.</li>
+                                <li>If no match is found, a message indicating that the book is not in the library is printed.</li>
+                                <li>The search is case-insensitive.</li>
+                              </ul>
+                            </li>
+                        </ul>
+                        
+                        <h3><code>Borrow Book</code></h3>
+                        <ul>
+                            <li>Borrow Book:</li>
+                            <li class="no-bullet-point">
+                                This method allows a <code>LibraryUser</code> to borrow a book from the library. 
+                                It takes the user's object and the title of the book to be borrowed as input.
+                            </li>
+                            <li class="no-bullet-point"><strong>Conditions:</strong>
+                                <ul>
+                                    <ul>
+                                        <li>The book must not already be borrowed.</li>
+                                        <li>The user's <code>borrow_count</code> must be smaller than their <code>borrow-limit</code>.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                If all conditions are met, the <code>is_borrowed</code> value of the book is updated, and the user's <code>borrow()</code> method is called. A message is printed indicating the user and book title.
+                            </li>
+                            <li>
+                                If the conditions are not met, a message indicating the issue is printed.
+                            </li>
+                        </ul>
+
+                        <h3><code>Return Book</code></h3>
+                        <ul>
+                            <li>Return Book:</li>
+                            <li class="no-bullet-point">
+                                This method allows a <code>LibraryUser</code> to return a borrowed book to the library. 
+                                It takes the user's object and the title of the book being returned.
+                            </li>
+                            <li class="no-bullet-point"><strong>Conditions:</strong>
+                                <ul>
+                                    <ul>
+                                        <li>The book must be marked as borrowed.</li>
+                                    </ul>
+                                </ul>
+                            </li>
+                            <li>
+                                If the book is borrowed, the <code>is_borrowed</code> value is updated, and the user's <code>return()</code> method is called. 
+                                A message is printed indicating the user and book title.
+                            </li>
+                            <li>
+                                If the conditions are not met, a message indicating the issue is printed.
+                            </li>
+                        </ul>
+                        
+                        <h3><code>Print</code></h3>
+                        <ul>
+                        <li>
+                            This method prints all the books stored in the library. 
+                            For each book, it prints the index in the vector followed by the details of the book, which are obtained using <code>book->print()</code>.</li>
+                        </ul>
+                </div>
+            </div>
+
+            <!--library-user class-->
+            <button type="button" class="collapsible">Library-User Class</button>
+            <div class="expand">
+                <div class="project-features">
+                    <!--
+                    <h3>Book Class</h3>
+                        <ul>
+                            <li>Represents data of individual books in the library.</li>
+                            <li>Stores book information such as<code>title</code>, <code>author</code>, <code>genre</code>, and <code>year_published</code>.</li>
+                        </ul>
+                        <br>
+                    -->
+                        <h1>Class Library_User</h1>
+                        <h2>Objective</h2>
+                        <p>
+                            The class Library_User stores user information and methods of interacting with the library. 
+                            It is the parent class for the two types of users:
+                        </p>
+                        <ul>
+                            <li>The class <code>Student</code> inherits from the class Library_User and has some special attributes and methods.</li>
+                            <li>The class <code>Teacher</code> inherits from the class Library_User and has some special attributes and methods.</li>
+                        </ul>
+
+                        <h2>Attributes</h2>
+                        <code>name</code>, <code>user_id</code>, <code>borrowed_count</code>
+                        <br>
+
+
+                        <h2>Methods</h2>
+                        
+                        <h3>Constructors</h3>
+                        <ul>
+                        <li><strong>Default Constructor:</strong><br>
+                            The default constructor sets the attributes <code>name</code> and <code>user_id</code> to <code>"n/a"</code>, and <code>borrowed_count</code> to 0.</li>
+                        
+                        <li><strong>Parameterized Constructors:</strong><br>
+                            Initializes all attributes (name, user_id, and borrowed_count) using the parametric constructors.</li>
+                        </ul>
+                        
+                        <h3><code>get_name()</code></h3>
+                        <ul>
+                        <li>Returns the <code>name</code> attribute of the user.</li>
+                        </ul>
+                        
+                        <h3><code>get__user_id()</code></h3>
+                        <ul>
+                        <li>Returns the <code>user_id</code> attribute of the user.</li>
+                        </ul>
+                        
+                        <h3><code>get_borrowed_count()</code></h3>
+                        <ul>
+                        <li>Returns the <code>borrowed_count</code> attribute of the user (number of the books borrowed).</li>
+                        </ul>
+                        
+                        <h3><code>borrow()</code></h3>
+                        <ul>
+                        <li>Increments the <code>borrowed_count</code> attribute of the user.</li>
+                        </ul>
+
+                        <h3><code>return()</code></h3>
+                        <ul>
+                        <li>Decrements the <code>borrowed_count</code> attribute of the user.</li>
+                        </ul>
+                        
+                        <h3><code>print()</code></h3>
+                        <ul>
+                        <li>Print the current values of the user attributes.</li>
+                        </ul>
+                        <br>
+
+                        <h2>Library-User Sublass: Student and Teacher</h2>
+                        <p>
+                            The <code>LibraryUser</code> class serves as a base class for both <code>Student</code> and <code>Teacher</code> subclasses, 
+                            managing attributes and methods common to all users of the library. 
+                            The <code>Student</code> and <code>Teacher</code> classes inherit from <code>LibraryUser</code> and each add unique features 
+                            such as borrowing limits and additional functionalities for teachers (e.g., adding and updating books in the library).
+                        </p>
+
+                        <h3>Student Class Methods (Inherits from LibraryUser)</h3>
+                        <ul>
+                            <li>Attributes:
+                                <ul>
+                                    <li><code>graduated:</code> Indicates whether the student has graduated (True/False).</li>
+                                    <li><code>borrow_limit</code> (const int): The maximum number of books a student can borrow. 
+                                        The borrow limit for students is typically lower than that for teachers.</li>
+                                </ul>
+                            </li>
+
+                            <li>Constructors:
+                                <ul>
+                                    <li>Default Constructor: Initializes the <code>graduated</code> attribute to False and <code>borrow_limit</code> to the default value specific to students.</li>
+                                    <li>Parameterized Constructor: Initializes the <code>borrow_limit</code> and attributes from <code>LibraryUser</code> by calling the parameterized constructor of <code>LibraryUser</code>.
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>Methods:
+                                <ul>
+                                    <li><code>get_borrow_limit():</code> 
+                                        <ul>
+                                            <li>Returns the <code>borrow-limit</code> specific to the student.</li>
+                                        </ul>
+                                    </li>
+                                    <li><code>print():</code> 
+                                        <ul>
+                                            <li>Prints details about the student, including whether they are a student, 
+                                                their name, borrow count, and the graduated status.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                        <h3>Teacher Class Methods (Inherits from LibraryUser)</h3>
+                        <ul>
+                            <li>Attributes:
+                                <ul>
+                                    <li><code>borrow_limit</code> (const int): The maximum number of books a teacher can borrow. 
+                                        This value is typically higher than that of a student.</li>
+                                </ul>
+                            </li>
+
+                            <li>Constructors:
+                                <ul>
+                                    <li>Default Constructor: Initializes the <code>borrow_limit</code> to the default value specific to teachers.</li>
+                                    <li>Parameterized Constructor: Initializes the <code>borrow_limit</code> and attributes from <code>LibraryUser</code> by calling the parameterized constructor of <code>LibraryUser</code>.
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>Methods:
+                                <ul>
+                                    <li><code>get_borrow_limit():</code> 
+                                        <ul>
+                                            <li>Returns the <code>borrow-limit</code> specific to the teacher.</li>
+                                        </ul>
+                                    </li>
+
+                                    <li><code>add_book_to_library():</code> 
+                                        <ul>
+                                            <li>Adds a <code>Book</code> pointer to a <code>Library</code> object. This method is only available to teachers, as they are allowed to add books to the library.</li>
+                                        </ul>
+                                    </li>
+
+                                    <li><code>update_book_details():</code> 
+                                        <ul>
+                                            <li>Updates the details (author, genre, year published) of an existing book in the library, if the title matches. This method is only available to teachers.</li>
+                                        </ul>
+                                    </li>
+
+                                    <li><code>print():</code> 
+                                        <ul>
+                                            <li>Prints details about the teacher, including whether they are a teacher, their name, borrow count, and the borrow limit.</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
 
 
 
