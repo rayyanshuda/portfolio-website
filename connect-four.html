@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ensures mobile-responsive -->
+    <meta name="description" content="Portfolio of Rayyan Huda showcasing software development and design projects.">
+    <meta name="keywords" content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development">
+    <meta name="author" content="Rayyan Huda">
+    <title>Connect Four Game | Rayyan Huda</title>
+    <link rel="icon" href="images/rh.png"> <!-- link to the favicon (icon in browser tab next to the page title)-->
+    <link rel="stylesheet" href="style.css"> <!-- link to the style.css file -->
+    <script src="main.js" defer></script> <!-- link to the javascript file -->
+    <script src="https://kit.fontawesome.com/54522e5b90.js" crossorigin="anonymous"></script> <!-- link to the fontawesome library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+</head>
+<body>
+    <div id="content">
+    <nav id="navbar">
+        <div class="container2">
+            <a href="index.html" behavior="smooth">
+            <img src="images/rh.png" class="logo">
+            </a>
+            <ul id="sidemenu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="images/external.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </div>    
+    </nav>
+    </div>
+
+<div id="project-content">
+    <div class="container">
+        <div class="heading">
+            <div class="project-title">
+                <h1>
+                    <span>Connect Four Replica</span>
+                    <br>
+                    Implementation of a Classic Game
+                </h1>
+            </div>
+            <a href="https://github.com/rayyanshuda/connectfour" target="_blank" rel="noopener noreferrer">
+                <button class="view">View GitHub</button>
+            </a>
+        </div>
+
+
+        <div class="row">
+            <div class="project-description">
+                <p>
+                    This project is a digital implementation of the classic Connect 4 game, 
+                    where two players compete to align four of their pieces in a row. 
+                    The game is developed in Java and features a user-friendly interface for an engaging gaming experience.
+                </p>
+            </div>
+            <div class="project-image">
+            <img src="images/connect-four.png" alt="graphical interface for connect four game">
+            </div>
+        </div>
+    </div>        
+</div>
+
+<div class="project-overview">
+    <div class="container">
+        <h2>Why This Project?</h2>
+        <p>
+            I chose to create this game because it required a foundational understanding of Java, and a beginner level knowledge in graphical user interfaces. 
+            The game being widely popular meant I would have resources to fall back on when I would be struggling. 
+            Along with the minimal experience the development demanded, my time commitment to designing this game 
+            also aligned with the general time it took to complete a game of this difficulty. 
+            I wanted to invest around 3-4 weeks from the start of understanding win conditions, implementing a GUI, 
+            and finally the game development itself, and I found this project to be entertaining, challenging, and a huge progression in my programming knowledge.
+        </p>
+
+        <h2>Concept</h2>
+        <div class="project-image">
+            <img src="images/og-connect-four.png" alt="picture of a normal connect four game">
+        </div>
+        <p>
+            The concept is alike the original game. The objective of the game is to be the first to form a horizontal, 
+            vertical, or diagonal line of four of one's own tokens. The two player game involves alternating turns where 
+            each player is allowed to place one token during their turn. After every turn, players check if a win condition has been met, 
+            or if the game continues. After a game is completed, they have the option to restart the game and play again.
+        </p>
+
+        <h2>Struggles</h2>
+        <p>
+            Although the concept is simple for the game, the development process was a lot harder. 
+            Win conditions must be checked from the token placed during that turn. Horizontal and vertical checks are simple to check, 
+            since they only require me to check in one direction (either up and down or left and right). 
+            The checks end either when the token changes, or the piece is at the edge of the grid. The diagonal checks proved to be much harder. 
+            The logic behind it was a bit more complicated, having to move the counter in a row and column pattern. 
+            I had to implement checks to make sure that when the counter moved into a new column and row, it didn't leave the board. 
+        </p>
+        <p>
+            Another problem I encountered was that the tokens would not be visible until the next token was placed. 
+            The players wouldn't be able to see the previous turn by the opponent. 
+            This one was a simple fix, as I created a new function to repaint the board throughout the game. 
+            In an endless loop, the board would be updated after each token placed.
+        </p>
+        <p>
+            Finally, the last problem of the notable issues was dealing with the end of the game. 
+            Disabling key listeners after the game-over value was true was a learning experience as I had never done this before. 
+            The Java AWT API that I was using for the GUI would forcefully close after the game was over. 
+            Experimenting with the API and its key listeners, I added a new function to keep the game going, a restart button. 
+            Pressing 'r' would restart and the clear the board, removing all tokens from the grid.
+        </p>
+
+        <h2>What did I learn?</h2>
+
+        <div class="project-image">
+            <img src="images/future-connect-four.png" alt="implementation of 'L' shaped win">
+        </div>
+        <p>
+            Majority of this project was new to me. I had basic knowledge in Java, but little to none with APIs and graphical interfaces. 
+            I found it enjoyable to test my knowledge with 2D arrays, conditionals, key listeners, and a simple UI design. 
+            Game development opened my eyes to a whole new world of logic, and connect four being a simple game, there is significant room for creative enhancements. 
+            For instance, you could introduce alternative winning conditions, such as allowing a player to win by forming an 'L' shape, 
+            similar to the movement pattern of a knight in chess. The coding aspect would involve checking all directions that an 'L' can 
+            make from the token placed, which would add a level of difficulty to the development, as well as the game. 
+        </p>
+
+        <p>
+            To showcase my learning, you can view my implementation of books, a library system, and library users and their respective attributes, constructors,
+            and methods. You can find more information about this project on my Github.
+        </p>
+
+    </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    Copyright &copy 2024. All rights reserved. <br>
+    Designed & Developed by Rayyan Huda 🧡
+  </footer>
+
+<script 
+    src="main.js" defer>
+</script>
+</div>
+</body>
+</html>
+
+<!-- comment -->
