@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ensures mobile-responsive -->
+    <meta name="description" content="Portfolio of Rayyan Huda showcasing software development and design projects.">
+    <meta name="keywords" content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development">
+    <meta name="author" content="Rayyan Huda">
+    <title>Connect Four Game | Rayyan Huda</title>
+    <link rel="icon" href="images/rh.png"> <!-- link to the favicon (icon in browser tab next to the page title)-->
+    <link rel="stylesheet" href="style.css"> <!-- link to the style.css file -->
+    <script src="main.js" defer></script> <!-- link to the javascript file -->
+    <script src="https://kit.fontawesome.com/54522e5b90.js" crossorigin="anonymous"></script> <!-- link to the fontawesome library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+</head>
+<body>
+    <div id="content">
+    <nav id="navbar">
+        <div class="container2">
+            <a href="index.html" behavior="smooth">
+            <img src="images/rh.png" class="logo">
+            </a>
+            <ul id="sidemenu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="images/external.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </div>    
+    </nav>
+    </div>
+
+<div id="project-content">
+    <div class="container">
+        <div class="heading">
+            <div class="project-title">
+                <h1>
+                    <span>Borough Battle</span>
+                    <br>
+                    Strategic Text-Based Game
+                </h1>
+            </div>
+            <a href="https://github.com/rayyanshuda/borough-battle" target="_blank" rel="noopener noreferrer">
+                <button class="view">View GitHub</button>
+            </a>
+        </div>
+
+
+        <div class="row">
+            <div class="project-description">
+                <p>
+                    In this game, the user plays against the computer in a turn-based text game in an attempt to 
+                    take over the five boroughs: Leaf Village, Sand Village, Cloud Village, Stone Village, and Mist Village
+                </p>
+            </div>
+            <div class="project-image">
+            <img src="images/borough-title.png" alt="title image for borough battle game">
+            </div>
+        </div>
+    </div>        
+</div>
+
+<div class="project-overview">
+    <div class="container">
+        <h2>Why This Project?</h2>
+        <p>
+            This was the first programming project I ever completed. Although it is a beginner project, 
+            I learned a lot along the way, from game logic to implementing conditionals, functions, 2D arrays, and player input. 
+            Beginning this project, I was invested in game development, but my limited knowledge held me from developing an advanced 
+            project with multiple sprites and environmental interactions. I wanted to create a project independent of others and 
+            develop a unique game. The game originally took 2-3 weeks to complete, but there are further improvements that I plan to add, 
+            including a GUI and perhaps some more strategic functionalities to increase the difficulty of the game in the future. Stay tuned for those updates!
+        </p>
+
+        <h2>Concept</h2>
+        <div class="project-image">
+            <img src="images/borough-battle-intro2.png" alt="picture of a normal connect four game">
+        </div>
+        <p>
+            The concept of the game is to be in control of five boroughs; Leaf Village, Sand Village, Cloud Village, Stone Village, and Mist Village.
+        </p>
+        <p>
+            The game is divided into three parts: the placement, the building, and the final battle.
+        </p>
+        <p>
+            In the placement, both the computer and the user have 10 soldiers which they can distribute any way they want in the five boroughs. 
+            The user goes first, and then the computer randomly assigns its ten soldiers. Both the user and computer must then pick their base borough. 
+            The user goes first, then the computer picks one. The computer cannot pick the same base as the user.
+        </p>
+        <p>
+            After this placement, the building occurs. The computer picks a random number between 10 and 25, which is how many turns this stage involves. 
+            In the building, the user and computer take turns in placing additional soldiers on the board. For each turn they can place one soldier 
+            in one of their boroughs. The computer chooses a random borough to place one of its soldiers in and announces this to the user. 
+            The user should not know how many turns are left.
+        </p>
+        <p>
+            Once the number of turns are over, the Final Battle takes place. In this round, each of the boroughs involves a battle between the soldiers. 
+            In each borough, the team with the higher number of soldiers wins and scores a number of points equal to the ratio between the two armies 
+            rounded down. For example, if the computer has 10 soldiers and the user has 4 then the computer scores 2 points (10/4 = 2.5 which is rounded down to 2). 
+            This score is doubled if a user wins its base borough. For example, if the user has 7 soldiers in its base borough and the computer has 2, 
+            then the user will score 6 points (7/2 = 3.5 which is rounded down to 3 and then doubled to 6).
+        </p>
+        <p>
+            The scores are tallied and the player with the most points wins. If the score is tied, then the player with the most boroughs wins. 
+            If that is also a tie, then the computer wins.
+        </p>
+
+        <h2>Struggles</h2>
+        <p>
+            Being my first project in game development, the initial functions were confusing to manipulate. 
+            I wasn't sure how to update the player and computer soldiers in each borough as the game progressed. 
+            I learned about 2D arrays and how to update the values for each placeholder, and that seemed to be the key to my answers 
+            about the data of the soldiers in each village.
+        </p>
+        <p>
+            My next problem occurred when the user chooses a base borough. I didn't have any way to save the information of what borough the 
+            play decided as the base. Originally, I was going to have a “base” value in each list element of the player, and then remove 
+            the “base” value for all others excluding the village the player chose. But this concept wasn't very efficient and would be 
+            repetitive depending on which borough the player chose. I decided doing the opposite would be a much better option, of appending 
+            a “base” value to the village the player chooses, and defining a variable for base village to the village name. 
+            Creating a variable to hold the base village name was done for ease when calculating the score, and to check which village was the base. 
+            Just appending the word “base” to the player list item wouldn't suffice since I wouldn't be able to check the existence of the 
+            “base” value in all the other villages and it would give me an error.
+
+        </p>
+
+        <h2>What did I learn?</h2>
+
+        <div class="project-image">
+            <img src="images/future-connect-four.png" alt="implementation of 'L' shaped win">
+        </div>
+        <p>
+            For a beginner level project, I'd say I'm very proud of what I've developed. Although it might be simple, 
+            it opens doors to the future where I can create more advanced and enjoyable games. Game logic was fun to mess around with, 
+            and I found that I was coming up with new ideas without a clue on how to implement them. As my programming knowledge increases, 
+            I do plan on coming back to this game and adding new features such as a GUI, additional strategy components, and maybe a 
+            2 player game mode. I want to continue my game development journey and I can't wait to share some new projects. Stay tuned!
+        </p>
+
+        <p>
+            To showcase my learning, you can view my implementation of a borough battle game and find more information about this project on my Github.
+        </p>
+
+    </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    Copyright &copy 2024. All rights reserved. <br>
+    Designed & Developed by Rayyan Huda 🧡
+  </footer>
+
+<script 
+    src="main.js" defer>
+</script>
+</div>
+</body>
+</html>
+
+<!-- comment -->

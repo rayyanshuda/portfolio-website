@@ -671,6 +671,8 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%; /* Ensure the container takes full width */
+    margin: 0 auto; /* Center the container itself */
 }
 
 .project-image img {
@@ -679,6 +681,7 @@ footer {
     object-fit: cover;
     border-radius: 10px;
     margin: 40px 0;
+    min-width: 520px;
 }
 
 .project-overview {
