@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ensures mobile-responsive -->
+    <meta name="description" content="Portfolio of Rayyan Huda showcasing software development and design projects.">
+    <meta name="keywords" content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development">
+    <meta name="author" content="Rayyan Huda">
+    <title>Jigsaw Puzzle Solver | Rayyan Huda</title>
+    <link rel="icon" href="images/rh.png"> <!-- link to the favicon (icon in browser tab next to the page title)-->
+    <link rel="stylesheet" href="style.css"> <!-- link to the style.css file -->
+    <script src="main.js" defer></script> <!-- link to the javascript file -->
+    <script src="https://kit.fontawesome.com/54522e5b90.js" crossorigin="anonymous"></script> <!-- link to the fontawesome library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        </style>
+</head>
+<body>
+    <div id="content">
+    <nav id="navbar">
+        <div class="container2">
+            <a href="index.html" behavior="smooth">
+            <img src="images/rh.png" class="logo">
+            </a>
+            <ul id="sidemenu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="images/external.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </div>    
+    </nav>
+    </div>
+
+<div id="project-content">
+    <div class="container">
+        <div class="heading">
+            <div class="project-title">
+                <h1>
+                    <span>Jigsaw Puzzle Solver</span>
+                    <br>
+                    Puzzle Solving Algorithm
+                </h1>
+            </div>
+            <a href="https://github.com/rayyanshuda/jigsaw-puzzle" target="_blank" rel="noopener noreferrer">
+                <button class="view">View GitHub</button>
+            </a>
+        </div>
+
+
+        <div class="row">
+            <div class="project-description">
+                <p>
+                    This program assumes an array of type jigsawpiece with a number of pieces in random order. 
+                    To solve it, the program will print the name attribute 
+                    of the pieces in order from top left to bottom right.
+                </p>
+            </div>
+            <div class="project-image">
+            <img src="images/puzzle-solvere.png" alt="puzzle solver image">
+            </div>
+        </div>
+    </div>        
+</div>
+
+<div class="project-overview">
+    <div class="container">
+        <h2>Why This Project?</h2>
+        <p>
+            After learning Python, I decided to expand my programming languages skillset, and moved to master Java. With some prior programming experience, there wasn't much of a learning
+            curve. I chose this first project, because it implemented many of the fundamental Java principles, as well as giving me some experience with classes. Not to mention, my frustration
+            when trying to do a puzzle would always end up with a half-done puzzle after I gave up. Now, I can solve any puzzle, no matter the size, within seconds. &#128513;
+        </p>
+
+        <h2>Concept</h2>
+        <div class="project-image">
+            <img src="images/jigsaw algorithm.png" alt="picture of a normal connect four game">
+        </div>
+        <p>
+            In standard jigsaw puzzles, each piece has four sides, and each side is either a tab (indenting outwards), blank (indenting inwards) or a straight edge. 
+            To make puzzles fit in only one way, each tab can only interlock with one other blank. One way to represent this in a program is to use a class where each 
+            side is represented by an integer. Tabs can be represented by positive numbers, edges by negative numbers, and sides by zero. If a tab and knot fit, 
+            they should have the same value (but different sign).
+        </p>
+        <p>
+            Each piece has the following attributes: name, which is a string that uniquely identifies each piece and side1, side2, side3, side4, all of which are integers 
+            representing the four sides of the jigsaw puzzle as integers. (Assume the orientation of each piece has side 1 on the left, side 2 on the top, side 3 on the right, 
+            side 4 on the bottom.)
+        </p>
+        <p>
+            In the case that a corresponding puzzle piece is not found, the program will continue until there are no more suitable pieces to complete the puzzle, and terminate itself.
+        </p>
+
+        <h2>Struggles</h2>
+        <p>
+            One of the biggest challenges I faced while working on my jigsaw puzzle solver was figuring out a general formula that could be used for any puzzle size. 
+            I wanted to refrain from brute-forcing it, and instead attempt to develop a systematic approach. The general idea was to solve row by row, from left to right. 
+            To identify the top-left piece, side 1 (left) and side 2 (top) would have to be straight edges. After this piece, I focused on finding the piece to its right, 
+            which would need side 1 (left) to match side 3 (right) of the top-left piece. I continued this process until I reached the right edge of the puzzle, where the 
+            last piece in the row would have a straight edge on side 3 (right).
+        </p>
+        <p>
+            My next struggle was how to figure out the remaining rows and when to stop. I wasn't sure how to transition to the next row. I realised I could solve this by 
+            adding all the ordered pieces to a list as I placed them. After I finished the first row, I would know how many pieces each row has, and I could determine the 
+            number of rows by dividing the total number of pieces by the number of pieces in a row. Since the top-left piece would be at the first index in the ordered list, 
+            I would have to find a corresponding side 2 (top) of a piece to side 4 (bottom) of the piece above it, which I would know since it would be ordered in my ordered list.
+        </p>
+        <p>
+            Since I knew how many rows the puzzle has, I implemented a while loop to continue until there would be no more rows to solve. Another solution I had, 
+            to know when the puzzle was completed, was to check if the piece at the end of the row had a straight edge on side 3 and side 4. this would indicate that it 
+            is the bottom right piece, and it is the last piece of the puzzle.
+        </p>
+
+        <h2>What did I learn?</h2>
+
+        <div class="project-image">
+            <img src="images/puzzles.jpg" alt="pic to show moving forward">
+        </div>
+        <p>
+            Through this project, I learned the importance of breaking down complex problems into manageable, logical steps. Initially, I struggled with conceptualizing a 
+            general method to solve puzzles of varying sizes without brute-forcing each piece together. By focusing on specific patterns, like identifying the top-left corner 
+            and building row by row, I developed a structured approach that eliminated redundancy and increased the clarity of my solution. This process reinforced the value of clear, 
+            methodical problem-solving in programming.
+        </p>
+        <p>
+            I also learned about leveraging data structures to simplify complex tasks. By maintaining an ordered list of puzzle pieces, I could track the arrangement 
+            and use it to calculate row lengths and determine relationships between adjacent pieces. This experience emphasized how thoughtful design choices in code, 
+            such as using meaningful data organization and loops, can guide logic and make the program adaptable to different scenarios.
+        </p>
+
+        <p>
+            To showcase my learning, you can view my implementation of a jigsaw puzzle solver and find more information about this project on my Github.
+        </p>
+
+    </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    Copyright &copy 2024. All rights reserved. <br>
+    Designed & Developed by Rayyan Huda 🧡
+  </footer>
+
+<script 
+    src="main.js" defer>
+</script>
+</div>
+</body>
+</html>
+
+<!-- comment -->
