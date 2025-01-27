@@ -853,6 +853,27 @@ ul ul li {
 }
 
 
+/* for figma embed code */
+iframe {
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.project-image video {
+    width: 50%;
+    display:inline-block;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 40px 0;
+    min-width: 520px;
+}
+
+.project-image video {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
+}
+
 /* Media Queries */
 
 
