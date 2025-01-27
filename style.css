@@ -25,6 +25,12 @@ body {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     margin-top: 10%;
+    overflow: hidden;
+}
+
+/* Webkit Browsers (Chrome, Safari, Edge) */
+body::-webkit-scrollbar {
+    display: none; /* Completely hide the scrollbar */
 }
 
 @keyframes fadeInAnimation {
@@ -872,6 +878,18 @@ iframe {
 .project-image video {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     object-fit: contain;
+}
+
+/* Progress bar container */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10px; /* Width of the bar */
+    height: 0; /* Initially no height */
+    background-color: #ff004f; /* Progress color */
+    transition: height 0.2s ease; /* Smooth fill effect */
+    z-index: 9999; /* Ensure it stays on top */
 }
 
 /* Media Queries */

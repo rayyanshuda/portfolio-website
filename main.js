@@ -122,6 +122,16 @@ for (var i = 0; i < coll.length; i++) {
   });
 }
 
+document.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY; // Current vertical scroll position
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight; // Total scrollable height
+    const scrollPercent = (scrollTop / docHeight) * 100; // Percentage of the page scrolled
+
+    // Update progress bar height
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar.style.height = `${scrollPercent}vh`; // Set height in viewport percentage
+});
+
 
 
 
