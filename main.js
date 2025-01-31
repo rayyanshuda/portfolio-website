@@ -133,5 +133,135 @@ document.addEventListener('scroll', () => {
 });
 
 
+// Scene, Camera, Renderer
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio set to 1 for square canvas
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(500, 500); // Match the size of the #model-box
+renderer.shadowMap.enabled = true;
+renderer.setClearColor(0x000000, 0); // Transparent background
+
+// Append the canvas to the #model-box div
+const modelBox = document.getElementById('model-box');
+modelBox.appendChild(renderer.domElement);
+
+// Add lighting
+// Lighting Setup
+const ambientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
+scene.add(ambientLight);
+
+// Directional Lights from Different Angles
+const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+directionalLight1.position.set(5, 10, 7.5);
+scene.add(directionalLight1);
+
+const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+directionalLight2.position.set(-5, 10, -7.5);
+scene.add(directionalLight2);
+
+
+
+
+// Load STL file
+const loader = new THREE.STLLoader();
+let model;
+
+loader.load('images/cybertruck3d.stl', function (geometry) {
+    geometry.computeVertexNormals();
+
+    const material = new THREE.MeshPhysicalMaterial({
+        color: 0xaaaaaa,
+        metalness: 0.5,
+        roughness: 0.1,
+        clearcoat: 0.5,
+        clearcoatRoughness: 1.0,
+        side: THREE.DoubleSide,
+    });
+
+    model = new THREE.Mesh(geometry, material);
+    model.castShadow = true;
+    geometry.center();
+
+    const boundingBox = new THREE.Box3().setFromObject(model);
+    const size = new THREE.Vector3();
+    boundingBox.getSize(size);
+    const maxDimension = Math.max(size.x, size.y, size.z);
+    const scale = 5 / maxDimension;
+    model.scale.set(scale, scale, scale);
+
+    scene.add(model);
+
+    const center = new THREE.Vector3();
+    boundingBox.getCenter(center);
+
+    camera.position.copy(center);
+    camera.position.z = maxDimension * 9.5;
+    camera.lookAt(center);
+});
+
+// Mouse interaction
+let isDragging = false;
+let previousMousePosition = { x: 0, y: 0 };
+
+document.addEventListener('mousedown', () => (isDragging = true));
+document.addEventListener('mouseup', () => (isDragging = false));
+
+// Mouse move event
+modelBox.addEventListener('mousemove', function (event) {
+    if (isDragging && model) {
+        const deltaMove = {
+            x: event.offsetX - previousMousePosition.x,
+            y: event.offsetY - previousMousePosition.y,
+        };
+
+        const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ')
+        );
+
+        model.quaternion.multiplyQuaternions(deltaRotationQuaternion, model.quaternion);
+    }
+
+    previousMousePosition = { x: event.offsetX, y: event.offsetY };
+});
+
+// Mouse wheel event for zoom
+document.addEventListener('wheel', function (event) {
+    const rect = modelBox.getBoundingClientRect();
+    const isInside = event.clientX >= rect.left && event.clientX <= rect.right &&
+                     event.clientY >= rect.top && event.clientY <= rect.bottom;
+
+    if (isInside && model) {
+        event.preventDefault(); // Prevent page scroll
+
+        // Define zoom constraints
+        const minZoom = 1; // Minimum distance from the model (make number smaller if you want to zoom in more)
+        const maxZoom = 10; // Maximum distance from the model (make number bigger if you want to zoom out more)
+
+        // Update camera position with constraints
+        camera.position.z += event.deltaY * 0.01;
+        camera.position.z = Math.min(Math.max(camera.position.z, minZoom), maxZoom);
+    }
+}, { passive: false });
+
+function toRadians(angle) {
+    return angle * (Math.PI / 180);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle window resize
+window.addEventListener('resize', function () {
+    const aspectRatio = modelBox.clientWidth / modelBox.clientHeight;
+    camera.aspect = aspectRatio;
+    camera.updateProjectionMatrix();
+    renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
+});
+
+
 
 

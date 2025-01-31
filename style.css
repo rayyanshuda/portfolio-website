@@ -892,6 +892,36 @@ iframe {
     z-index: 9999; /* Ensure it stays on top */
 }
 
+#model-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#model-container p {
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+#model-box {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    border: 2px solid #ff004f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* Media Queries */
 
 
@@ -901,6 +931,7 @@ nav .fa-solid {
     display: none;
 }
 @media only screen and (max-width: 600px) {
+    
     .logo {
         width: 50px;
         height: 50px;

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Rayyan Huda showcasing software development and design projects.">
+    <meta name="keywords" content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development">
+    <meta name="author" content="Rayyan Huda">
+    <title>Cybertruck Jeep 3D Design | Rayyan Huda</title>
+    <link rel="icon" href="images/rh.png">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+    <script src="main.js" defer></script> <!-- Link to external JS -->
+    <script src="https://kit.fontawesome.com/54522e5b90.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    </style>
+</head>
+<body>
+
+    <div id="content">
+        <div class="progress-bar"></div>
+    <nav id="navbar">
+        <div class="container2">
+            <a href="index.html" behavior="smooth">
+            <img src="images/rh.png" class="logo">
+            </a>
+            <ul id="sidemenu">
+                <li><a href="about.html">About</a></li>
+                <li><a href="images/external.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
+            </ul>
+        </div>    
+    </nav>
+    </div>
+
+
+    <div id="project-content">
+        <div class="container">
+            <div class="heading">
+                <div class="project-title">
+                    <h1>
+                        <span>Cybertruck Jeep Design</span>
+                        <br>
+                        SolidWorks 3D Assembly
+                    </h1>
+                </div>
+                <a href="https://github.com/rayyanshuda/cybertruck-jeep" target="_blank" rel="noopener noreferrer">
+                    <button class="view">View GitHub</button>
+                </a>
+            </div>
+            
+    
+            <div class="row">
+                <div class="project-description">
+                    <p>
+                        This is a 3D model designed and assembled in SolidWorks. It's made up of several components including the body, chasis, dash board, rods, seat, steering wheel, 
+                        and tires. A sectional drawing and exploded view of the assembly are included in my repository.
+                    </p>
+                </div>
+                <div class="project-image">
+
+                    <div id="model-container">
+                        <div id="model-box"></div>
+                        <p>Interact with me!</p>
+                    </div>
+
+                    </div>
+            </div>
+        </div>        
+    </div>
+
+
+    <div class="project-overview">
+        <div class="container">
+            <h2>Why This Project?</h2>
+            <div class="project-image">
+                <img src="images//cybertruck-exploded.png" alt="cybertruck exploded view solidworks">
+            </div>
+            <p>
+                Following some Blender tutorials (the sprinkle donut was a good place to start), I wanted to dip my feet into 3D modelling and design. So I turned my head to SolidWorks,
+                a simpler beginner friendly software. I've spent most of my personal projects dabbling in software development with various languages including Python, Java, C++, and 
+                experimenting with HTML, CSS, and JavaScript with this portfolio website. Expanding my horizon, 3D is the next challenge I set myself up to, and although my results may not
+                on par with other designs in the community, I've proud of what I've modelled and excited to show the community!
+            </p>
+    
+            <h2>Concept & Struggles</h2>
+            <div class="project-image">
+                <img src="images/cybertruck-model.jpg" alt="Cybertruck design 3D">
+            </div>
+            <p>
+                The idea was to create a Jeep-like Cybertruck. The Cybertruck with it's box-y figure was perfect as a beginner to recreate and implement some features. I had some initial
+                sketches and ideas of how I would implement this, with various different extrudes, cuts, and revolves. The concept for my tires was a circular pattern for treads, rotating the shape
+                around the center of the tire as the axis. I used the same circular technique for the spokes of the steering wheel, rotating a spoke in the middle 3 times (60 degrees between each spoke). 
+                For the interior, I wanted to hollow out space for seats and extra room in the back. I was familiar with the shell tool and it's implementation, but errors regarding zero-thickness geometry kept occuring during this process. 
+                The amount that I was initially attempting to shell would give the exterior zero thickness, and the intersection with the walls would disappear, since there would be no thickness between the walls.
+            </p>
+            <p>
+                The chassis of the car required the most design thinking. Since it integrates every part of the car together, I needed specifc dimensions for the spacing of the rods that the tires go through, slots to keep the seats
+                and dashboards in place (visible from underneath the model), as well as the dimensions of the exterior so the chassis is able to rest underneath the full length of the vehicle. 
+                The rods that supported the front and back wheels were simple, just keeping in mind the diameter of the rod slot in the chassis, and optimizing the length so it doesn't extend parts
+                the wheels. The seats were made fully of splines and a single extrude for it's width. For the assembly, the mates were made to connect each part together to resemble the impression of a vehicle.
+            </p>
+    
+            <h2>What did I learn?</h2>
+    
+            <div class="project-image">
+                <img src="images/cybertruck-sectional.png" alt="cybertruck sectional view solidworks">
+            </div>
+            <p>
+                I learned how to break down a complex design into manageable parts, starting with the basic frame and gradually modelling details like the angular body panels and wheel wells. I improved my understanding of parametric modeling, making sure the dimensions and constraints were properly defined for best practices. Using surface modeling, fillets, and chamfers, I experimented with sharp edges and smooth transitions around faces to replicate the Cybertruck's aesthetic while incorporating Jeep-like rugged elements. I also became more efficient with assemblies, learning how to properly mate components like wheels, doors, and the chassis. Overall, this project helped me develop precision, design iteration skills, and problem-solving techniques when dealing with unique geometries in SolidWorks.
+            </p>
+            <p>
+                Everything about this project was a learning experience. From picking up tools in Blender and SolidWorks to shelling my cybertruck design, I experimeneted with a lot of
+                the features available and got a taste of what 3D design is like, and the thought process behind creating a model. Having a vision, to drawing sketches, to planning out what
+                tools I would use, and finally modelling, it wasn't a easy or short task. It was a process where a lot of the time, I got stuck and consulted with my friends, tutorials,
+                or the SolidWorks community. 
+            </p>
+            
+    
+            <p>
+                To showcase my learning, you can interact with my cybertruck model above and view all SolidWorks parts, assemblies, and exploded drawings on my GitHub.
+            </p>
+    
+        </div>
+    </div>
+    
+      
+
+    
+
+    <!-- Footer -->
+    <footer>
+        Copyright &copy 2024. All rights reserved. <br>
+        Designed & Developed by Rayyan Huda 🧡
+    </footer>
+
+    <!-- Three.js and STLLoader scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/STLLoader.js"></script>
+</body>
+</html>
