@@ -166,7 +166,7 @@ scene.add(directionalLight2);
 const loader = new THREE.STLLoader();
 let model;
 
-loader.load('images/cybertruck3d.stl', function (geometry) {
+loader.load('/portfolio-website/images/cybertruck3D.stl', function (geometry) {
     geometry.computeVertexNormals();
 
     const material = new THREE.MeshPhysicalMaterial({
