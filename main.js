@@ -264,4 +264,184 @@ window.addEventListener('resize', function () {
 
 
 
+let slideIndex = 1;
+showSlides(slideIndex);
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+
+
+// Scene, Camera, Renderer
+const gumballScene = new THREE.Scene();
+const gumballCamera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio will be updated
+const gumballRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+gumballRenderer.setSize(600, 600); // Match the size of the container
+gumballRenderer.shadowMap.enabled = true;
+gumballRenderer.setClearColor(0x000000, 0); // Transparent background
+
+// Append the canvas to the #gumball-model-box div
+const gumballModelBox = document.getElementById('gumball-model-box');
+gumballModelBox.appendChild(gumballRenderer.domElement);
+
+// Add lighting
+const gumballAmbientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
+gumballScene.add(gumballAmbientLight);
+
+const gumballDirectionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+gumballDirectionalLight1.position.set(5, 10, 7.5);
+gumballScene.add(gumballDirectionalLight1);
+
+const gumballDirectionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+gumballDirectionalLight2.position.set(-5, 10, -7.5);
+gumballScene.add(gumballDirectionalLight2);
+
+// Load STL files
+const gumballLoader = new THREE.STLLoader();
+const gumballModelFiles = [
+    './images/gumball-base.stl',
+    './images/gumball-container.stl',
+    './images/gumball-crank.stl',
+    './images/gumball-spinner.stl',
+    './images/gumball-head.stl',
+    './images/gumball-tail.stl'
+
+];
+
+let gumballCurrentModelIndex = 0;
+let gumballModel;
+
+function loadGumballModel(index) {
+    if (gumballModel) {
+        gumballScene.remove(gumballModel);
+    }
+
+    gumballLoader.load(gumballModelFiles[index], function (geometry) {
+        geometry.computeVertexNormals();
+
+        const gumballMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xaaaaaa,
+            metalness: 0.5,
+            roughness: 0.1,
+            clearcoat: 0.5,
+            clearcoatRoughness: 1.0,
+            side: THREE.DoubleSide,
+        });
+
+        gumballModel = new THREE.Mesh(geometry, gumballMaterial);
+        gumballModel.castShadow = true;
+        geometry.center();
+
+        const gumballBoundingBox = new THREE.Box3().setFromObject(gumballModel);
+        const gumballSize = new THREE.Vector3();
+        gumballBoundingBox.getSize(gumballSize);
+        const gumballMaxDimension = Math.max(gumballSize.x, gumballSize.y, gumballSize.z);
+        const gumballScale = 5 / gumballMaxDimension;
+        gumballModel.scale.set(gumballScale, gumballScale, gumballScale);
+
+        gumballScene.add(gumballModel);
+
+        const gumballCenter = new THREE.Vector3();
+        gumballBoundingBox.getCenter(gumballCenter);
+
+        // Adjust camera position for initial zoom
+        gumballCamera.position.copy(gumballCenter);
+        gumballCamera.position.z = 7; // Adjust this value for initial zoom
+        gumballCamera.lookAt(gumballCenter);
+    }, undefined, function (error) {
+        console.error('Error loading STL file:', error);
+    });
+}
+
+// Load the first model
+loadGumballModel(gumballCurrentModelIndex);
+
+// Slideshow controls
+document.getElementById('gumball-prev-btn').addEventListener('click', () => {
+    gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
+    loadGumballModel(gumballCurrentModelIndex);
+});
+
+document.getElementById('gumball-next-btn').addEventListener('click', () => {
+    gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
+    loadGumballModel(gumballCurrentModelIndex);
+});
+
+// Mouse interaction
+let gumballIsDragging = false;
+let gumballPreviousMousePosition = { x: 0, y: 0 };
+
+gumballModelBox.addEventListener('mousedown', () => (gumballIsDragging = true));
+gumballModelBox.addEventListener('mouseup', () => (gumballIsDragging = false));
+
+gumballModelBox.addEventListener('mousemove', function (event) {
+    if (gumballIsDragging && gumballModel) {
+        const gumballDeltaMove = {
+            x: event.offsetX - gumballPreviousMousePosition.x,
+            y: event.offsetY - gumballPreviousMousePosition.y,
+        };
+
+        const gumballDeltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+            new THREE.Euler(toGumballRadians(gumballDeltaMove.y * 1), toGumballRadians(gumballDeltaMove.x * 1), 0, 'XYZ')
+        );
+
+        gumballModel.quaternion.multiplyQuaternions(gumballDeltaRotationQuaternion, gumballModel.quaternion);
+    }
+
+    gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
+});
+
+// Mouse wheel event for zoom
+gumballModelBox.addEventListener('wheel', function (event) {
+    event.preventDefault(); // Prevent page scroll
+
+    if (gumballModel) {
+        const gumballMinZoom = 1; // Minimum zoom distance
+        const gumballMaxZoom = 10; // Maximum zoom distance
+        gumballCamera.position.z += event.deltaY * 0.01;
+        gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
+    }
+}, { passive: false });
+
+function toGumballRadians(angle) {
+    return angle * (Math.PI / 180);
+}
+
+function animateGumball() {
+    requestAnimationFrame(animateGumball);
+    gumballRenderer.render(gumballScene, gumballCamera);
+}
+
+animateGumball();
+
+// Handle window resize
+window.addEventListener('resize', function () {
+    const gumballAspectRatio = gumballModelBox.clientWidth / gumballModelBox.clientHeight;
+    gumballCamera.aspect = gumballAspectRatio;
+    gumballCamera.updateProjectionMatrix();
+    gumballRenderer.setSize(gumballModelBox.clientWidth, gumballModelBox.clientHeight);
+});
+
 
