@@ -791,6 +791,8 @@ code {
     border-bottom: none;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-bottom: 2px solid #424A57;
+    background-color: #1A1A22;
 }
 
   
@@ -829,6 +831,7 @@ code {
     border-style: solid;
     border-color: #424A57;
     border-top: none;
+    background-color: #1A1A22;
 }
 
 
