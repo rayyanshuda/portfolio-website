@@ -304,11 +304,11 @@ if (gumballModelBox) {
     const gumballLoader = new THREE.STLLoader();
     const gumballModelFiles = [
         './images/gumball-base.stl',
-        './images/gumball-container.stl',
-        './images/gumball-crank.stl',
-        './images/gumball-spinner.stl',
-        './images/gumball-head.stl',
-        './images/gumball-tail.stl'
+        './images/gumball-container.STL',
+        './images/gumball-crank.STL',
+        './images/gumball-spinner.STL',
+        './images/gumball-head.STL',
+        './images/gumball-tail.STL'
 
     ];
 
