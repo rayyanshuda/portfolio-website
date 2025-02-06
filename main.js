@@ -133,6 +133,9 @@ document.addEventListener('scroll', () => {
 });
 
 
+
+//cybertruck model
+
 // Scene, Camera, Renderer
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // Aspect ratio set to 1 for square canvas
@@ -143,155 +146,132 @@ renderer.setClearColor(0x000000, 0); // Transparent background
 
 // Append the canvas to the #model-box div
 const modelBox = document.getElementById('model-box');
-modelBox.appendChild(renderer.domElement);
-
-// Add lighting
-// Lighting Setup
-const ambientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
-scene.add(ambientLight);
-
-// Directional Lights from Different Angles
-const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
-directionalLight1.position.set(5, 10, 7.5);
-scene.add(directionalLight1);
-
-const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight2.position.set(-5, 10, -7.5);
-scene.add(directionalLight2);
 
 
 
+if (modelBox) {
+    modelBox.appendChild(renderer.domElement);
+    // Add lighting
+    // Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
+    scene.add(ambientLight);
 
-// Load STL file
-const loader = new THREE.STLLoader();
-let model;
+    // Directional Lights from Different Angles
+    const directionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+    directionalLight1.position.set(5, 10, 7.5);
+    scene.add(directionalLight1);
 
-loader.load('./images/cybertruck3D.stl', function (geometry) {
-    geometry.computeVertexNormals();
+    const directionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight2.position.set(-5, 10, -7.5);
+    scene.add(directionalLight2);
 
-    const material = new THREE.MeshPhysicalMaterial({
-        color: 0xaaaaaa,
-        metalness: 0.5,
-        roughness: 0.1,
-        clearcoat: 0.5,
-        clearcoatRoughness: 1.0,
-        side: THREE.DoubleSide,
+
+
+
+    // Load STL file
+    const loader = new THREE.STLLoader();
+    let model;
+
+    loader.load('./images/cybertruck3D.stl', function (geometry) {
+        geometry.computeVertexNormals();
+
+        const material = new THREE.MeshPhysicalMaterial({
+            color: 0xaaaaaa,
+            metalness: 0.5,
+            roughness: 0.1,
+            clearcoat: 0.5,
+            clearcoatRoughness: 1.0,
+            side: THREE.DoubleSide,
+        });
+
+        model = new THREE.Mesh(geometry, material);
+        model.castShadow = true;
+        geometry.center();
+
+        const boundingBox = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        boundingBox.getSize(size);
+        const maxDimension = Math.max(size.x, size.y, size.z);
+        const scale = 5 / maxDimension;
+        model.scale.set(scale, scale, scale);
+
+        scene.add(model);
+
+        const center = new THREE.Vector3();
+        boundingBox.getCenter(center);
+
+        camera.position.copy(center);
+        camera.position.z = maxDimension * 9.5;
+        camera.lookAt(center);
     });
 
-    model = new THREE.Mesh(geometry, material);
-    model.castShadow = true;
-    geometry.center();
+    // Mouse interaction
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
 
-    const boundingBox = new THREE.Box3().setFromObject(model);
-    const size = new THREE.Vector3();
-    boundingBox.getSize(size);
-    const maxDimension = Math.max(size.x, size.y, size.z);
-    const scale = 5 / maxDimension;
-    model.scale.set(scale, scale, scale);
+    document.addEventListener('mousedown', () => (isDragging = true));
+    document.addEventListener('mouseup', () => (isDragging = false));
 
-    scene.add(model);
+    // Mouse move event
+    modelBox.addEventListener('mousemove', function (event) {
+        if (isDragging && model) {
+            const deltaMove = {
+                x: event.offsetX - previousMousePosition.x,
+                y: event.offsetY - previousMousePosition.y,
+            };
 
-    const center = new THREE.Vector3();
-    boundingBox.getCenter(center);
+            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ')
+            );
 
-    camera.position.copy(center);
-    camera.position.z = maxDimension * 9.5;
-    camera.lookAt(center);
-});
+            model.quaternion.multiplyQuaternions(deltaRotationQuaternion, model.quaternion);
+        }
 
-// Mouse interaction
-let isDragging = false;
-let previousMousePosition = { x: 0, y: 0 };
+        previousMousePosition = { x: event.offsetX, y: event.offsetY };
+    });
 
-document.addEventListener('mousedown', () => (isDragging = true));
-document.addEventListener('mouseup', () => (isDragging = false));
+    // Mouse wheel event for zoom
+    document.addEventListener('wheel', function (event) {
+        const rect = modelBox.getBoundingClientRect();
+        const isInside = event.clientX >= rect.left && event.clientX <= rect.right &&
+                        event.clientY >= rect.top && event.clientY <= rect.bottom;
 
-// Mouse move event
-modelBox.addEventListener('mousemove', function (event) {
-    if (isDragging && model) {
-        const deltaMove = {
-            x: event.offsetX - previousMousePosition.x,
-            y: event.offsetY - previousMousePosition.y,
-        };
+        if (isInside && model) {
+            event.preventDefault(); // Prevent page scroll
 
-        const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
-            new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ')
-        );
+            // Define zoom constraints
+            const minZoom = 1; // Minimum distance from the model (make number smaller if you want to zoom in more)
+            const maxZoom = 10; // Maximum distance from the model (make number bigger if you want to zoom out more)
 
-        model.quaternion.multiplyQuaternions(deltaRotationQuaternion, model.quaternion);
+            // Update camera position with constraints
+            camera.position.z += event.deltaY * 0.01;
+            camera.position.z = Math.min(Math.max(camera.position.z, minZoom), maxZoom);
+        }
+    }, { passive: false });
+
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
     }
 
-    previousMousePosition = { x: event.offsetX, y: event.offsetY };
-});
-
-// Mouse wheel event for zoom
-document.addEventListener('wheel', function (event) {
-    const rect = modelBox.getBoundingClientRect();
-    const isInside = event.clientX >= rect.left && event.clientX <= rect.right &&
-                     event.clientY >= rect.top && event.clientY <= rect.bottom;
-
-    if (isInside && model) {
-        event.preventDefault(); // Prevent page scroll
-
-        // Define zoom constraints
-        const minZoom = 1; // Minimum distance from the model (make number smaller if you want to zoom in more)
-        const maxZoom = 10; // Maximum distance from the model (make number bigger if you want to zoom out more)
-
-        // Update camera position with constraints
-        camera.position.z += event.deltaY * 0.01;
-        camera.position.z = Math.min(Math.max(camera.position.z, minZoom), maxZoom);
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
     }
-}, { passive: false });
 
-function toRadians(angle) {
-    return angle * (Math.PI / 180);
-}
+    animate();
 
-function animate() {
-    requestAnimationFrame(animate);
-    renderer.render(scene, camera);
-}
-
-animate();
-
-// Handle window resize
-window.addEventListener('resize', function () {
-    const aspectRatio = modelBox.clientWidth / modelBox.clientHeight;
-    camera.aspect = aspectRatio;
-    camera.updateProjectionMatrix();
-    renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
-});
+    // Handle window resize
+    window.addEventListener('resize', function () {
+        const aspectRatio = modelBox.clientWidth / modelBox.clientHeight;
+        camera.aspect = aspectRatio;
+        camera.updateProjectionMatrix();
+        renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
+    });
+};
 
 
+//gumball-machine
 
-let slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
 
 
 // Scene, Camera, Renderer
@@ -304,144 +284,195 @@ gumballRenderer.setClearColor(0x000000, 0); // Transparent background
 
 // Append the canvas to the #gumball-model-box div
 const gumballModelBox = document.getElementById('gumball-model-box');
-gumballModelBox.appendChild(gumballRenderer.domElement);
 
-// Add lighting
-const gumballAmbientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
-gumballScene.add(gumballAmbientLight);
 
-const gumballDirectionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
-gumballDirectionalLight1.position.set(5, 10, 7.5);
-gumballScene.add(gumballDirectionalLight1);
+if (gumballModelBox) {
+    gumballModelBox.appendChild(gumballRenderer.domElement);
+    // Add lighting
+    const gumballAmbientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
+    gumballScene.add(gumballAmbientLight);
 
-const gumballDirectionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-gumballDirectionalLight2.position.set(-5, 10, -7.5);
-gumballScene.add(gumballDirectionalLight2);
+    const gumballDirectionalLight1 = new THREE.DirectionalLight(0xffffff, 1.2);
+    gumballDirectionalLight1.position.set(5, 10, 7.5);
+    gumballScene.add(gumballDirectionalLight1);
 
-// Load STL files
-const gumballLoader = new THREE.STLLoader();
-const gumballModelFiles = [
-    './images/gumball-base.stl',
-    './images/gumball-container.stl',
-    './images/gumball-crank.stl',
-    './images/gumball-spinner.stl',
-    './images/gumball-head.stl',
-    './images/gumball-tail.stl'
+    const gumballDirectionalLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
+    gumballDirectionalLight2.position.set(-5, 10, -7.5);
+    gumballScene.add(gumballDirectionalLight2);
 
-];
+    // Load STL files
+    const gumballLoader = new THREE.STLLoader();
+    const gumballModelFiles = [
+        './images/gumball-base.stl',
+        './images/gumball-container.stl',
+        './images/gumball-crank.stl',
+        './images/gumball-spinner.stl',
+        './images/gumball-head.stl',
+        './images/gumball-tail.stl'
 
-let gumballCurrentModelIndex = 0;
-let gumballModel;
+    ];
 
-function loadGumballModel(index) {
-    if (gumballModel) {
-        gumballScene.remove(gumballModel);
-    }
+    let gumballCurrentModelIndex = 0;
+    let gumballModel;
 
-    gumballLoader.load(gumballModelFiles[index], function (geometry) {
-        geometry.computeVertexNormals();
+    function loadGumballModel(index) {
+        if (gumballModel) {
+            gumballScene.remove(gumballModel);
+        }
 
-        const gumballMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0xaaaaaa,
-            metalness: 0.5,
-            roughness: 0.1,
-            clearcoat: 0.5,
-            clearcoatRoughness: 1.0,
-            side: THREE.DoubleSide,
+        gumballLoader.load(gumballModelFiles[index], function (geometry) {
+            geometry.computeVertexNormals();
+
+            const gumballMaterial = new THREE.MeshPhysicalMaterial({
+                color: 0xaaaaaa,
+                metalness: 0.5,
+                roughness: 0.1,
+                clearcoat: 0.5,
+                clearcoatRoughness: 1.0,
+                side: THREE.DoubleSide,
+            });
+
+            gumballModel = new THREE.Mesh(geometry, gumballMaterial);
+            gumballModel.castShadow = true;
+            geometry.center();
+
+            const gumballBoundingBox = new THREE.Box3().setFromObject(gumballModel);
+            const gumballSize = new THREE.Vector3();
+            gumballBoundingBox.getSize(gumballSize);
+            const gumballMaxDimension = Math.max(gumballSize.x, gumballSize.y, gumballSize.z);
+            const gumballScale = 5 / gumballMaxDimension;
+            gumballModel.scale.set(gumballScale, gumballScale, gumballScale);
+
+            gumballScene.add(gumballModel);
+
+            const gumballCenter = new THREE.Vector3();
+            gumballBoundingBox.getCenter(gumballCenter);
+
+            // Adjust camera position for initial zoom
+            gumballCamera.position.copy(gumballCenter);
+            gumballCamera.position.z = 7; // Adjust this value for initial zoom
+            gumballCamera.lookAt(gumballCenter);
+        }, undefined, function (error) {
+            console.error('Error loading STL file:', error);
         });
+    }
+/*
+    // Load the first model
+    loadGumballModel(gumballCurrentModelIndex);
 
-        gumballModel = new THREE.Mesh(geometry, gumballMaterial);
-        gumballModel.castShadow = true;
-        geometry.center();
-
-        const gumballBoundingBox = new THREE.Box3().setFromObject(gumballModel);
-        const gumballSize = new THREE.Vector3();
-        gumballBoundingBox.getSize(gumballSize);
-        const gumballMaxDimension = Math.max(gumballSize.x, gumballSize.y, gumballSize.z);
-        const gumballScale = 5 / gumballMaxDimension;
-        gumballModel.scale.set(gumballScale, gumballScale, gumballScale);
-
-        gumballScene.add(gumballModel);
-
-        const gumballCenter = new THREE.Vector3();
-        gumballBoundingBox.getCenter(gumballCenter);
-
-        // Adjust camera position for initial zoom
-        gumballCamera.position.copy(gumballCenter);
-        gumballCamera.position.z = 7; // Adjust this value for initial zoom
-        gumballCamera.lookAt(gumballCenter);
-    }, undefined, function (error) {
-        console.error('Error loading STL file:', error);
+    // Slideshow controls
+    document.getElementById('gumball-prev-btn').addEventListener('click', () => {
+        gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
+        loadGumballModel(gumballCurrentModelIndex);
     });
-}
 
-// Load the first model
-loadGumballModel(gumballCurrentModelIndex);
+    document.getElementById('gumball-next-btn').addEventListener('click', () => {
+        gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
+        loadGumballModel(gumballCurrentModelIndex);
+    });
+*/
+
 
 // Slideshow controls
-document.getElementById('gumball-prev-btn').addEventListener('click', () => {
-    gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
-    loadGumballModel(gumballCurrentModelIndex);
+loadGumballModel(gumballCurrentModelIndex);
+document.querySelectorAll('.prev, .next').forEach(button => {
+    button.addEventListener('click', (event) => {
+        // Check which button was clicked by inspecting the target's ID or class
+        if (/*event.target.id === 'gumball-prev-btn' || */event.target.classList.contains('prev')) {
+            gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
+        } else if (/*event.target.id === 'gumball-next-btn' || */ event.target.classList.contains('next')) {
+            gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
+        }
+            
+        // Load the new model based on the updated index
+        loadGumballModel(gumballCurrentModelIndex);
+    });
 });
 
-document.getElementById('gumball-next-btn').addEventListener('click', () => {
-    gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
-    loadGumballModel(gumballCurrentModelIndex);
-});
+    // Mouse interaction
+    let gumballIsDragging = false;
+    let gumballPreviousMousePosition = { x: 0, y: 0 };
 
-// Mouse interaction
-let gumballIsDragging = false;
-let gumballPreviousMousePosition = { x: 0, y: 0 };
+    gumballModelBox.addEventListener('mousedown', () => (gumballIsDragging = true));
+    gumballModelBox.addEventListener('mouseup', () => (gumballIsDragging = false));
 
-gumballModelBox.addEventListener('mousedown', () => (gumballIsDragging = true));
-gumballModelBox.addEventListener('mouseup', () => (gumballIsDragging = false));
+    gumballModelBox.addEventListener('mousemove', function (event) {
+        if (gumballIsDragging && gumballModel) {
+            const gumballDeltaMove = {
+                x: event.offsetX - gumballPreviousMousePosition.x,
+                y: event.offsetY - gumballPreviousMousePosition.y,
+            };
 
-gumballModelBox.addEventListener('mousemove', function (event) {
-    if (gumballIsDragging && gumballModel) {
-        const gumballDeltaMove = {
-            x: event.offsetX - gumballPreviousMousePosition.x,
-            y: event.offsetY - gumballPreviousMousePosition.y,
-        };
+            const gumballDeltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toGumballRadians(gumballDeltaMove.y * 1), toGumballRadians(gumballDeltaMove.x * 1), 0, 'XYZ')
+            );
 
-        const gumballDeltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
-            new THREE.Euler(toGumballRadians(gumballDeltaMove.y * 1), toGumballRadians(gumballDeltaMove.x * 1), 0, 'XYZ')
-        );
+            gumballModel.quaternion.multiplyQuaternions(gumballDeltaRotationQuaternion, gumballModel.quaternion);
+        }
 
-        gumballModel.quaternion.multiplyQuaternions(gumballDeltaRotationQuaternion, gumballModel.quaternion);
+        gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
+    });
+
+    // Mouse wheel event for zoom
+    gumballModelBox.addEventListener('wheel', function (event) {
+        event.preventDefault(); // Prevent page scroll
+
+        if (gumballModel) {
+            const gumballMinZoom = 1; // Minimum zoom distance
+            const gumballMaxZoom = 10; // Maximum zoom distance
+            gumballCamera.position.z += event.deltaY * 0.01;
+            gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
+        }
+    }, { passive: false });
+
+    function toGumballRadians(angle) {
+        return angle * (Math.PI / 180);
     }
 
-    gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
-});
-
-// Mouse wheel event for zoom
-gumballModelBox.addEventListener('wheel', function (event) {
-    event.preventDefault(); // Prevent page scroll
-
-    if (gumballModel) {
-        const gumballMinZoom = 1; // Minimum zoom distance
-        const gumballMaxZoom = 10; // Maximum zoom distance
-        gumballCamera.position.z += event.deltaY * 0.01;
-        gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
+    function animateGumball() {
+        requestAnimationFrame(animateGumball);
+        gumballRenderer.render(gumballScene, gumballCamera);
     }
-}, { passive: false });
 
-function toGumballRadians(angle) {
-    return angle * (Math.PI / 180);
+    animateGumball();
+
+    // Handle window resize
+    window.addEventListener('resize', function () {
+        const gumballAspectRatio = gumballModelBox.clientWidth / gumballModelBox.clientHeight;
+        gumballCamera.aspect = gumballAspectRatio;
+        gumballCamera.updateProjectionMatrix();
+        gumballRenderer.setSize(gumballModelBox.clientWidth, gumballModelBox.clientHeight);
+    });
+};
+
+// Array of model descriptions
+const gumballModelDescriptions = [
+    "Container",
+    "Body",
+    "Crank",
+    "Spinner",
+    "Head",
+    "Tail"
+    // Add more descriptions as needed
+];
+
+let gumballCurrentModelIndex = 0; // Start at first model
+
+function plusSlides(n) {
+    gumballCurrentModelIndex = (gumballCurrentModelIndex + n + gumballModelDescriptions.length) % gumballModelDescriptions.length;
+
+
+    // Update the caption
+    updateModelCaption();
 }
 
-function animateGumball() {
-    requestAnimationFrame(animateGumball);
-    gumballRenderer.render(gumballScene, gumballCamera);
+// Function to update the caption
+function updateModelCaption() {
+    document.getElementById("gumball-caption").textContent = gumballModelDescriptions[gumballCurrentModelIndex];
 }
 
-animateGumball();
+// Initial caption update when the page loads
+updateModelCaption();
 
-// Handle window resize
-window.addEventListener('resize', function () {
-    const gumballAspectRatio = gumballModelBox.clientWidth / gumballModelBox.clientHeight;
-    gumballCamera.aspect = gumballAspectRatio;
-    gumballCamera.updateProjectionMatrix();
-    gumballRenderer.setSize(gumballModelBox.clientWidth, gumballModelBox.clientHeight);
-});
 
 
