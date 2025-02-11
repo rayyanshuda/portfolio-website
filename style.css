@@ -656,15 +656,13 @@ footer {
     align-self: center; /* Center button vertically within its flex container */
     margin-top: 30px; /* Add vertical space from the top */
     margin-right: 60px;
+    transition: background-color 0.3s ease-in-out;
 }
 
 .view:hover {
-    /*background-color: #0056b3;  Darker color on hover */
-    background-color: #db0045;
+    background-color: #aa0036;
+    transition: background-color 0.3s ease-in-out;
 }
-
-
-
 
 
 .project-description {
@@ -679,6 +677,7 @@ footer {
     align-items: center;
     width: 100%; /* Ensure the container takes full width */
     margin: 0 auto; /* Center the container itself */
+    flex-direction: column;
 }
 
 .project-image img {
@@ -686,8 +685,19 @@ footer {
     display:inline-block;
     object-fit: cover;
     border-radius: 10px;
-    margin: 40px 0;
+    margin: 40px 0; 
     min-width: 520px;
+}
+
+#gumball-gif {
+    width: 50%; /* Adjust as needed */
+    max-width: 300px; /* Optional: Set a max size */
+}
+
+#concept-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .project-overview {
@@ -705,6 +715,10 @@ footer {
     margin-top: 20px;
 }
 
+.collapsible-item {
+    margin-bottom: 35px;
+}
+
 .project-overview p {
     font-size: 18px;
     margin-bottom: 40px;
@@ -719,6 +733,15 @@ footer {
 
 .project-features h3 {
     font-size: 20px;
+}
+
+.project-features img {
+    width: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 40px auto; /* Center the image horizontally */
+    max-width: 350px;
 }
 
 code {
@@ -740,7 +763,7 @@ code {
 
 .project-features p {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 40px;
 }
 
 .collapsible-list {
@@ -963,6 +986,7 @@ canvas {
 
 .gumball-button:hover {
     background-color: #db0045;
+    transition: background-color 0.3s ease;
 }
 
 /* Next & previous buttons */
