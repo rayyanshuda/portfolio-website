@@ -212,7 +212,7 @@
             </div>
             <div class="contact-right">
 
-                <form action="https://api.web3forms.com/submit" method="POST">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" autocomplete="off">
 
                     <!-- Replace with your Access Key -->
                     <input type="hidden" name="access_key" value="7c96112c-3c92-470e-b8a3-167695840565">
@@ -224,7 +224,6 @@
                 
                     <!-- Honeypot Spam Protection -->
                     <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
                     <button type="submit" class="btn btn2">Send Message</button>
                 </form>
 
@@ -241,6 +240,8 @@
 
 <script 
     src="main.js" defer>
+</script>
+
 </script>
 </div>
 </body>

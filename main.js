@@ -475,4 +475,29 @@ function updateModelCaption() {
 updateModelCaption();
 
 
+window.onload = function () {
+    const form = document.getElementById("contact-form");
+
+    if (form) {
+        // Force reset by setting each field's value to an empty string
+        form.querySelectorAll("input, textarea").forEach(field => {
+            field.value = "";
+        });
+
+        // Clear session history to prevent autofill
+        window.history.replaceState({}, document.title, window.location.pathname);
+
+        // Scroll back to the form if redirected after submission
+        if (window.location.hash === "#contact") {
+            form.scrollIntoView({ behavior: "smooth" });
+        }
+    }
+};
+
+// Append #contact to the URL before form submission
+document.getElementById("contact-form").addEventListener("submit", function() {
+    this.action += "#contact";
+});
+
+
 
