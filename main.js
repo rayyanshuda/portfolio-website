@@ -451,15 +451,23 @@ document.querySelectorAll('.prev, .next').forEach(button => {
     // Touch events
     gumballModelBox.addEventListener("touchstart", (event) => {
         event.preventDefault();  // Prevent default touch behavior (like scrolling)
-        gumballIsDragging = true;
-        gumballPreviousMousePosition = { 
-            x: event.touches[0].clientX, 
-            y: event.touches[0].clientY 
-        };
+        if (event.touches.length === 1) {
+            gumballIsDragging = true;
+            gumballPreviousMousePosition = { 
+                x: event.touches[0].clientX, 
+                y: event.touches[0].clientY 
+            };
+        } else if (event.touches.length === 2) {
+            gumballIsDragging = false;
+            gumballPreviousDistance = Math.hypot(
+                event.touches[0].clientX - event.touches[1].clientX,
+                event.touches[0].clientY - event.touches[1].clientY
+            );
+        }
     }, false);
     
     gumballModelBox.addEventListener("touchmove", (event) => {
-        if (gumballIsDragging && gumballModel) {
+        if (event.touches.length === 1 && gumballIsDragging && gumballModel) {
             const deltaMove = {
                 x: event.touches[0].clientX - gumballPreviousMousePosition.x,
                 y: event.touches[0].clientY - gumballPreviousMousePosition.y,
@@ -470,12 +478,20 @@ document.querySelectorAll('.prev, .next').forEach(button => {
             );
     
             gumballModel.quaternion.multiplyQuaternions(deltaRotationQuaternion, gumballModel.quaternion);
-        }
     
-        gumballPreviousMousePosition = { 
-            x: event.touches[0].clientX, 
-            y: event.touches[0].clientY 
-        };
+            gumballPreviousMousePosition = { 
+                x: event.touches[0].clientX, 
+                y: event.touches[0].clientY 
+            };
+        } else if (event.touches.length === 2) {
+            const currentDistance = Math.hypot(
+                event.touches[0].clientX - event.touches[1].clientX,
+                event.touches[0].clientY - event.touches[1].clientY
+            );
+            const deltaDistance = currentDistance - gumballPreviousDistance;
+            gumballCamera.position.z -= deltaDistance * 0.01;
+            gumballPreviousDistance = currentDistance;
+        }
     }, false);
     
     gumballModelBox.addEventListener("touchend", () => {
