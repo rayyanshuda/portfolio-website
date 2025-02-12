@@ -447,40 +447,42 @@ document.querySelectorAll('.prev, .next').forEach(button => {
         gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
     });
     
-    
+
     // Touch events
-    gumballModelBox.addEventListener("touchstart", (event) => {
-        event.preventDefault();  // Prevent default touch behavior (like scrolling)
-        gumballIsDragging = true;
-        gumballPreviousMousePosition = { 
-            x: event.touches[0].clientX, 
-            y: event.touches[0].clientY 
-        };
-    }, false);
+    gumballModelBox.addEventListener('touchstart', function (event) {
+    if (event.touches.length === 2) {
+        // Store initial distance between the two touch points when the pinch starts
+        const dx = event.touches[0].clientX - event.touches[1].clientX;
+        const dy = event.touches[0].clientY - event.touches[1].clientY;
+        gumballTouchStartDistance = Math.sqrt(dx * dx + dy * dy);
+    }
+    }, { passive: false });
     
-    gumballModelBox.addEventListener("touchmove", (event) => {
-        if (gumballIsDragging && gumballModel) {
-            const deltaMove = {
-                x: event.touches[0].clientX - gumballPreviousMousePosition.x,
-                y: event.touches[0].clientY - gumballPreviousMousePosition.y,
-            };
+    gumballModelBox.addEventListener('touchmove', function (event) {
+        if (event.touches.length === 2 && gumballTouchStartDistance !== null) {
+            // Calculate the current distance between the two touch points
+            const dx = event.touches[0].clientX - event.touches[1].clientX;
+            const dy = event.touches[0].clientY - event.touches[1].clientY;
+            const gumballTouchCurrentDistance = Math.sqrt(dx * dx + dy * dy);
     
-            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
-                new THREE.Euler(toGumballRadians(deltaMove.y * 1), toGumballRadians(deltaMove.x * 1), 0, 'XYZ')
-            );
+            // Calculate zoom change based on the difference in distance
+            const zoomChange = (gumballTouchCurrentDistance - gumballTouchStartDistance) * 0.01; // Adjust multiplier for sensitivity
+            gumballCamera.position.z += zoomChange;
     
-            gumballModel.quaternion.multiplyQuaternions(deltaRotationQuaternion, gumballModel.quaternion);
+            // Ensure the camera's z position stays within the defined zoom range
+            const gumballMinZoom = 1;
+            const gumballMaxZoom = 10;
+            gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
+    
+            // Update the start distance for the next touchmove event
+            gumballTouchStartDistance = gumballTouchCurrentDistance;
         }
+    }, { passive: false });
     
-        gumballPreviousMousePosition = { 
-            x: event.touches[0].clientX, 
-            y: event.touches[0].clientY 
-        };
-    }, false);
-    
-    gumballModelBox.addEventListener("touchend", () => {
-        gumballIsDragging = false;
-    }, false);
+    gumballModelBox.addEventListener('touchend', function () {
+        // Reset the touch start distance when the touch ends
+        gumballTouchStartDistance = null;
+    }, { passive: false });
 
 
     // Mouse wheel event for zoom
