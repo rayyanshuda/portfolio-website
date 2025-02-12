@@ -1,7 +1,7 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');*/
 *{
     margin: 0;
-    padding: 0;
+    padding: 0 ;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
@@ -15,6 +15,7 @@ html {
     background: #1A1A22;
     scroll-behavior: smooth;
     overflow-x: hidden; /* Prevent horizontal overflow */
+    width: 100%;
 }
 
 body {
@@ -26,6 +27,7 @@ body {
     animation-fill-mode: forwards;
     margin-top: 10%;
     overflow: hidden;
+    width: 100%;
 }
 
 /* Webkit Browsers (Chrome, Safari, Edge) */
@@ -49,23 +51,12 @@ body::-webkit-scrollbar {
     background-size: cover;
     background-position: center;
 }
+
+/* old container styling
 .container {
     max-width: 1170px; 
     margin: auto; 
-    padding: 20px 2%; /*top and bottom 10px, left and right 10%*/
-    /*max-width: 1200px;
-    width: 100%;
-    padding: 0 20px;*/
-}
-/*
-nav {
-    display: flex; 
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    flex-wrap: wrap;
-    transition: top 0.3s;
-    z-index: 1000; /*z-index is used to stack elements on top of each other
+    padding: 20px 2%; 
 }
 */
 
@@ -248,6 +239,7 @@ strong {
     max-width: 1200px;
     width: 100%;
     padding: 0 20px;
+    margin: auto;
 }
 
 .work-list {
@@ -628,6 +620,7 @@ footer {
     justify-content: space-between; /* Space out content (title and button) */
     align-items: flex-start; /* Align items at the top initially */
     padding: 10px 20px; /* Add padding for spacing */
+    flex-wrap: wrap;
 }
 
 .project-title {
@@ -686,7 +679,8 @@ footer {
     object-fit: cover;
     border-radius: 10px;
     margin: 40px 0; 
-    min-width: 520px;
+    max-width: 650px;
+    height: auto;
 }
 
 #gumball-gif {
@@ -1030,7 +1024,21 @@ canvas {
 }
 
 
+.intro {
+    line-height: 40px;
+    font-size: 24px;
+}
 
+/*
+font-size: 16px;
+line-height: 30px;
+
+font-size: 16px;
+line-height: 28px;
+
+font-size: 20px;
+line-height: 36px;
+*/
 
 
 /* Media Queries */
@@ -1041,7 +1049,21 @@ canvas {
 nav .fa-solid {
     display: none;
 }
-@media only screen and (max-width: 600px) {
+
+
+
+
+
+@media only screen and (max-width: 600px) {    
+
+    .project-description {
+        line-height: 40px;
+        font-size: 16px;
+    }
+
+    .project-overview p {
+        font-size: 16px;
+    }
     
     .logo {
         width: 50px;
@@ -1228,12 +1250,6 @@ nav .fa-solid {
         text-decoration: none; /* Remove underline from links */
     }
 
-
-
-
-
-
-
     /*small screen css for about.html webpage*/
 
     .name {
@@ -1273,6 +1289,30 @@ nav .fa-solid {
         margin-top: 20px;
     }
 
+
+    .project-image img {
+        width: 90%; /* Make it take more space on smaller screens */
+        max-width: 100%; /* Prevent overflow */
+    }
+
+    .heading {
+        margin-top: 70px;
+        flex-direction: column; /* Stack title and button vertically */
+    }
+
+    .project-title h1 {
+        font-size: 24px; /* Smaller font size for mobile */
+    }
+
+    .project-title h1 span {
+        font-size: 35px; /* Smaller font size for span on mobile */
+    }
+
+    .view {
+        margin-top: 20px; /* Adjust button margin for better spacing */
+        margin-right: 0; /* Remove right margin to center the button */
+        width: auto; /* Ensure button doesn’t stretch */
+    }
 
 
     footer {
@@ -1455,8 +1495,16 @@ nav .fa-solid {
     .picture {
         margin-top: 20px;
     }
-
     
+    .project-image img {
+        width: 90%; /* Make it take more space on smaller screens */
+        max-width: 600px; /* Limit the maximum size of the image */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .heading {
+        padding-top: 70px /* Add padding for spacing */
+    }
 
 
 
@@ -1472,19 +1520,29 @@ nav .fa-solid {
 
 /* Laptops and Small Desktops (1025px to 1440px) */
 @media only screen and (min-width: 1025px) and (max-width: 1440px) {
+    
     nav {
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
         padding: 20px;
     }
 
     nav ul {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: auto;
+        background: none;
         display: flex;
-        justify-content: flex-end;
-        gap: 30px;
+        gap: 30px; /* Add spacing between menu items */
     }
 
     nav ul li {
         margin: 0;
         font-size: 18px;
+        text-align: left;
     }
 
     .header-text {
@@ -1568,6 +1626,18 @@ nav .fa-solid {
     .social-icons {
         gap: 20px;
         font-size: 30px;
+    }
+
+    .project-overview p {
+        font-size: 20px;
+    }
+
+    .project-title h1 {
+        font-size: 35px;
+    }
+    
+    .project-title h1 span {
+        font-size: 55px;
     }
 
     footer {
