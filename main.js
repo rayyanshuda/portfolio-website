@@ -212,6 +212,40 @@ if (modelBox) {
     document.addEventListener('mousedown', () => (isDragging = true));
     document.addEventListener('mouseup', () => (isDragging = false));
 
+    // Touch interaction for mobile
+    renderer.domElement.addEventListener("touchstart", (event) => {
+        event.preventDefault();  // Prevent default touch behavior (like scrolling)
+        isDragging = true;
+        previousMousePosition = { 
+            x: event.touches[0].clientX, 
+            y: event.touches[0].clientY 
+        };
+    }, false);
+
+    renderer.domElement.addEventListener("touchmove", (event) => {
+        if (isDragging && model) {
+            const deltaMove = {
+                x: event.touches[0].clientX - previousMousePosition.x,
+                y: event.touches[0].clientY - previousMousePosition.y,
+            };
+
+            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ')
+            );
+
+            model.quaternion.multiplyQuaternions(deltaRotationQuaternion, model.quaternion);
+
+            previousMousePosition = { 
+                x: event.touches[0].clientX, 
+                y: event.touches[0].clientY 
+            };
+        }
+    }, false);
+
+    renderer.domElement.addEventListener("touchend", () => {
+        isDragging = false;
+    }, false);
+
     // Mouse move event
     modelBox.addEventListener('mousemove', function (event) {
         if (isDragging && model) {
@@ -402,16 +436,51 @@ document.querySelectorAll('.prev, .next').forEach(button => {
                 x: event.offsetX - gumballPreviousMousePosition.x,
                 y: event.offsetY - gumballPreviousMousePosition.y,
             };
-
+    
             const gumballDeltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
                 new THREE.Euler(toGumballRadians(gumballDeltaMove.y * 1), toGumballRadians(gumballDeltaMove.x * 1), 0, 'XYZ')
             );
-
+    
             gumballModel.quaternion.multiplyQuaternions(gumballDeltaRotationQuaternion, gumballModel.quaternion);
         }
-
+    
         gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
     });
+    
+    // Touch events
+    gumballModelBox.addEventListener("touchstart", (event) => {
+        event.preventDefault();  // Prevent default touch behavior (like scrolling)
+        gumballIsDragging = true;
+        gumballPreviousMousePosition = { 
+            x: event.touches[0].clientX, 
+            y: event.touches[0].clientY 
+        };
+    }, false);
+    
+    gumballModelBox.addEventListener("touchmove", (event) => {
+        if (gumballIsDragging && gumballModel) {
+            const deltaMove = {
+                x: event.touches[0].clientX - gumballPreviousMousePosition.x,
+                y: event.touches[0].clientY - gumballPreviousMousePosition.y,
+            };
+    
+            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toGumballRadians(deltaMove.y * 1), toGumballRadians(deltaMove.x * 1), 0, 'XYZ')
+            );
+    
+            gumballModel.quaternion.multiplyQuaternions(deltaRotationQuaternion, gumballModel.quaternion);
+        }
+    
+        gumballPreviousMousePosition = { 
+            x: event.touches[0].clientX, 
+            y: event.touches[0].clientY 
+        };
+    }, false);
+    
+    gumballModelBox.addEventListener("touchend", () => {
+        gumballIsDragging = false;
+    }, false);
+
 
     // Mouse wheel event for zoom
     gumballModelBox.addEventListener('wheel', function (event) {
@@ -432,6 +501,7 @@ document.querySelectorAll('.prev, .next').forEach(button => {
     function animateGumball() {
         requestAnimationFrame(animateGumball);
         gumballRenderer.render(gumballScene, gumballCamera);
+        
     }
 
     animateGumball();
@@ -498,6 +568,5 @@ window.onload = function () {
 document.getElementById("contact-form").addEventListener("submit", function() {
     this.action += "#contact";
 });
-
 
 
