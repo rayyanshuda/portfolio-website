@@ -448,41 +448,52 @@ document.querySelectorAll('.prev, .next').forEach(button => {
     });
     
 
-    // Touch events
+    let lastTouchDistance = 0;
+    let gumballIsPinching = false;
+    
     gumballModelBox.addEventListener('touchstart', function (event) {
-    if (event.touches.length === 2) {
-        // Store initial distance between the two touch points when the pinch starts
-        const dx = event.touches[0].clientX - event.touches[1].clientX;
-        const dy = event.touches[0].clientY - event.touches[1].clientY;
-        gumballTouchStartDistance = Math.sqrt(dx * dx + dy * dy);
-    }
-    }, { passive: false });
+        if (event.touches.length === 2) {
+            // Pinch gesture started
+            gumballIsPinching = true;
+            lastTouchDistance = getTouchDistance(event);
+        }
+    });
     
     gumballModelBox.addEventListener('touchmove', function (event) {
-        if (event.touches.length === 2 && gumballTouchStartDistance !== null) {
-            // Calculate the current distance between the two touch points
-            const dx = event.touches[0].clientX - event.touches[1].clientX;
-            const dy = event.touches[0].clientY - event.touches[1].clientY;
-            const gumballTouchCurrentDistance = Math.sqrt(dx * dx + dy * dy);
+        if (gumballIsPinching && event.touches.length === 2) {
+            // Pinch gesture is in progress
+            const touchDistance = getTouchDistance(event);
+            const deltaDistance = touchDistance - lastTouchDistance;
+            
+            // Zoom based on the pinch distance
+            const zoomFactor = 0.1;
+            gumballCamera.position.z += deltaDistance * zoomFactor;
     
-            // Calculate zoom change based on the difference in distance
-            const zoomChange = (gumballTouchCurrentDistance - gumballTouchStartDistance) * 0.01; // Adjust multiplier for sensitivity
-            gumballCamera.position.z += zoomChange;
-    
-            // Ensure the camera's z position stays within the defined zoom range
+            // Prevent zooming out too far or in too close
             const gumballMinZoom = 1;
             const gumballMaxZoom = 10;
             gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
     
-            // Update the start distance for the next touchmove event
-            gumballTouchStartDistance = gumballTouchCurrentDistance;
+            // Update last touch distance for the next move
+            lastTouchDistance = touchDistance;
         }
-    }, { passive: false });
+    });
     
-    gumballModelBox.addEventListener('touchend', function () {
-        // Reset the touch start distance when the touch ends
-        gumballTouchStartDistance = null;
-    }, { passive: false });
+    gumballModelBox.addEventListener('touchend', function (event) {
+        if (event.touches.length < 2) {
+            // Pinch gesture ended
+            gumballIsPinching = false;
+        }
+    });
+    
+    // Helper function to calculate the distance between two touch points
+    function getTouchDistance(event) {
+        const touch1 = event.touches[0];
+        const touch2 = event.touches[1];
+        const dx = touch2.pageX - touch1.pageX;
+        const dy = touch2.pageY - touch1.pageY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 
 
     // Mouse wheel event for zoom
