@@ -447,6 +447,7 @@ document.querySelectorAll('.prev, .next').forEach(button => {
         gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
     });
     
+    
     // Touch events
     gumballModelBox.addEventListener("touchstart", (event) => {
         event.preventDefault();  // Prevent default touch behavior (like scrolling)
