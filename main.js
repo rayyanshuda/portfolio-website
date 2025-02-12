@@ -447,53 +447,40 @@ document.querySelectorAll('.prev, .next').forEach(button => {
         gumballPreviousMousePosition = { x: event.offsetX, y: event.offsetY };
     });
     
-
-    let lastTouchDistance = 0;
-    let gumballIsPinching = false;
     
-    gumballModelBox.addEventListener('touchstart', function (event) {
-        if (event.touches.length === 2) {
-            // Pinch gesture started
-            gumballIsPinching = true;
-            lastTouchDistance = getTouchDistance(event);
+    // Touch events
+    gumballModelBox.addEventListener("touchstart", (event) => {
+        event.preventDefault();  // Prevent default touch behavior (like scrolling)
+        gumballIsDragging = true;
+        gumballPreviousMousePosition = { 
+            x: event.touches[0].clientX, 
+            y: event.touches[0].clientY 
+        };
+    }, false);
+    
+    gumballModelBox.addEventListener("touchmove", (event) => {
+        if (gumballIsDragging && gumballModel) {
+            const deltaMove = {
+                x: event.touches[0].clientX - gumballPreviousMousePosition.x,
+                y: event.touches[0].clientY - gumballPreviousMousePosition.y,
+            };
+    
+            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toGumballRadians(deltaMove.y * 1), toGumballRadians(deltaMove.x * 1), 0, 'XYZ')
+            );
+    
+            gumballModel.quaternion.multiplyQuaternions(deltaRotationQuaternion, gumballModel.quaternion);
         }
-    });
     
-    gumballModelBox.addEventListener('touchmove', function (event) {
-        if (gumballIsPinching && event.touches.length === 2) {
-            // Pinch gesture is in progress
-            const touchDistance = getTouchDistance(event);
-            const deltaDistance = touchDistance - lastTouchDistance;
-            
-            // Zoom based on the pinch distance
-            const zoomFactor = 0.1;
-            gumballCamera.position.z += deltaDistance * zoomFactor;
+        gumballPreviousMousePosition = { 
+            x: event.touches[0].clientX, 
+            y: event.touches[0].clientY 
+        };
+    }, false);
     
-            // Prevent zooming out too far or in too close
-            const gumballMinZoom = 1;
-            const gumballMaxZoom = 10;
-            gumballCamera.position.z = Math.min(Math.max(gumballCamera.position.z, gumballMinZoom), gumballMaxZoom);
-    
-            // Update last touch distance for the next move
-            lastTouchDistance = touchDistance;
-        }
-    });
-    
-    gumballModelBox.addEventListener('touchend', function (event) {
-        if (event.touches.length < 2) {
-            // Pinch gesture ended
-            gumballIsPinching = false;
-        }
-    });
-    
-    // Helper function to calculate the distance between two touch points
-    function getTouchDistance(event) {
-        const touch1 = event.touches[0];
-        const touch2 = event.touches[1];
-        const dx = touch2.pageX - touch1.pageX;
-        const dy = touch2.pageY - touch1.pageY;
-        return Math.sqrt(dx * dx + dy * dy);
-    }
+    gumballModelBox.addEventListener("touchend", () => {
+        gumballIsDragging = false;
+    }, false);
 
 
     // Mouse wheel event for zoom
@@ -582,5 +569,4 @@ window.onload = function () {
 document.getElementById("contact-form").addEventListener("submit", function() {
     this.action += "#contact";
 });
-
 
