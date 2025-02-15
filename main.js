@@ -151,6 +151,18 @@ const modelBox = document.getElementById('model-box');
 
 if (modelBox) {
     modelBox.appendChild(renderer.domElement);
+
+
+
+    const aspectRatio = modelBox.clientWidth / modelBox.clientHeight;
+    camera.aspect = aspectRatio;
+    camera.updateProjectionMatrix();
+    renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
+
+    setTimeout(() => {
+        camera.updateProjectionMatrix();
+        renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
+    }, 100);
     // Add lighting
     // Lighting Setup
     const ambientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
