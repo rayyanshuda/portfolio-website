@@ -214,54 +214,56 @@ if (modelBox) {
 
 
      // Touch events
-     gumballModelBox.addEventListener("touchstart", (event) => {
+     modelBox.addEventListener("touchstart", (event) => {
         event.preventDefault();  // Prevent default touch behavior (like scrolling)
         if (event.touches.length === 1) {
-            gumballIsDragging = true;
-            gumballPreviousMousePosition = { 
+            isDragging = true;
+            previousMousePosition = { 
                 x: event.touches[0].clientX, 
                 y: event.touches[0].clientY 
             };
         } else if (event.touches.length === 2) {
-            gumballIsDragging = false;
-            gumballPreviousDistance = Math.hypot(
+            isDragging = false;
+            previousDistance = Math.hypot(
                 event.touches[0].clientX - event.touches[1].clientX,
                 event.touches[0].clientY - event.touches[1].clientY
             );
         }
     }, false);
     
-    gumballModelBox.addEventListener("touchmove", (event) => {
-        if (event.touches.length === 1 && gumballIsDragging && gumballModel) {
-            const deltaMove = {
-                x: event.touches[0].clientX - gumballPreviousMousePosition.x,
-                y: event.touches[0].clientY - gumballPreviousMousePosition.y,
+    modelBox.addEventListener("touchmove", (event) => {
+        if (event.touches.length === 1 && isDragging && model) {
+            const touchDeltaMove = {
+                x: event.touches[0].clientX - previousMousePosition.x,
+                y: event.touches[0].clientY - previousMousePosition.y,
             };
     
-            const deltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
-                new THREE.Euler(toGumballRadians(deltaMove.y * 1), toGumballRadians(deltaMove.x * 1), 0, 'XYZ')
+            const touchDeltaRotationQuaternion = new THREE.Quaternion().setFromEuler(
+                new THREE.Euler(toRadians(touchDeltaMove.y * 1), toRadians(touchDeltaMove.x * 1), 0, 'XYZ')
             );
     
-            gumballModel.quaternion.multiplyQuaternions(deltaRotationQuaternion, gumballModel.quaternion);
+            model.quaternion.multiplyQuaternions(touchDeltaRotationQuaternion, model.quaternion);
     
-            gumballPreviousMousePosition = { 
+            previousMousePosition = { 
                 x: event.touches[0].clientX, 
                 y: event.touches[0].clientY 
             };
         } else if (event.touches.length === 2) {
-            const currentDistance = Math.hypot(
+            const currentDistance1 = Math.hypot(
                 event.touches[0].clientX - event.touches[1].clientX,
                 event.touches[0].clientY - event.touches[1].clientY
             );
-            const deltaDistance = currentDistance - gumballPreviousDistance;
-            gumballCamera.position.z -= deltaDistance * 0.01;
-            gumballPreviousDistance = currentDistance;
+            const deltaDistance = currentDistance1 - previousDistance;
+            camera.position.z -= deltaDistance * 0.01;
+            previousDistance = currentDistance1;
         }
     }, false);
     
-    gumballModelBox.addEventListener("touchend", () => {
-        gumballIsDragging = false;
+    modelBox.addEventListener("touchend", () => {
+        isDragging = false;
     }, false);
+
+
 
     // Mouse move event
     modelBox.addEventListener('mousemove', function (event) {
