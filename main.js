@@ -600,5 +600,8 @@ window.onload = function () {
     }
 };
 
-
+// Append #contact to the URL before form submission
+document.getElementById("contact-form").addEventListener("submit", function() {
+    this.action += "#contact";
+});
 
