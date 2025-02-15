@@ -1553,6 +1553,10 @@ nav .fa-solid {
         height: auto;
     }
 
+    .gumball-video {
+        border: 2px solid #ff004f;
+    }
+
     .heading {
         padding-top: 70px /* Add padding for spacing */
     }
