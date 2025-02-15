@@ -691,8 +691,9 @@ footer {
 }
 
 #gumball-gif {
-    width: 50%; /* Adjust as needed */
-    max-width: 300px; /* Optional: Set a max size */
+    width: 40%; /* Adjust as needed */
+    max-width: 450px; /* Optional: Set a max size */
+    height: auto;
 }
 
 #concept-text {
@@ -1334,6 +1335,11 @@ nav .fa-solid {
         max-width: 100%; /* Prevent overflow */
     }
 
+    #gumball-gif {
+        width: 80%; /* Make it bigger on mobile */
+        max-width: 100%; /* Ensure it doesn't exceed the screen width */
+    }
+
     .heading {
         margin-top: 70px;
         flex-direction: column; /* Stack title and button vertically */
@@ -1541,6 +1547,12 @@ nav .fa-solid {
         height: auto; /* Maintain aspect ratio */
     }
 
+    #gumball-gif {
+        width: 80%; /* Make it bigger on mobile */
+        max-width: 500px; /* Ensure it doesn't exceed the screen width */
+        height: auto;
+    }
+
     .heading {
         padding-top: 70px /* Add padding for spacing */
     }
@@ -1683,6 +1695,13 @@ nav .fa-solid {
     .project-image video {
         width: 90%; /* Make it take most of the container width */
         max-width: 600px; /* Prevent it from getting too large */
+        height: auto;
+    }
+
+    #gumball-gif {
+        width: 80%; /* Make it bigger on mobile */
+        max-width: 500px; /* Ensure it doesn't exceed the screen width */
+        height: auto;
     }
 
     footer {
