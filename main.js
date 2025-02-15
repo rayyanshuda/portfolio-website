@@ -605,3 +605,15 @@ document.getElementById("contact-form").addEventListener("submit", function() {
     this.action += "#contact";
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const video = document.getElementById("foodVideo");
+
+    // Attempt to autoplay the video (muted is required for autoplay to work)
+    video.play().then(() => {
+        video.pause(); // Pause immediately
+        video.currentTime = 0; // Ensure it starts from the beginning
+    }).catch(error => {
+        console.log("Autoplay failed:", error);
+    });
+});
+
