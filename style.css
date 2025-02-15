@@ -1341,7 +1341,7 @@ nav .fa-solid {
     }
 
     .gumball-video {
-        border: 2px solid #ff004f;
+        border: 2px solid rgba(255, 0, 79, 0.3);
     }
 
     .heading {

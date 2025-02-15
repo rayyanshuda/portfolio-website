@@ -509,6 +509,10 @@ document.querySelectorAll('.prev, .next').forEach(button => {
             );
             const deltaDistance = currentDistance - gumballPreviousDistance;
             gumballCamera.position.z -= deltaDistance * 0.01;
+
+            // Apply zoom limits
+            gumballCamera.position.z = Math.max(1, Math.min(10, gumballCamera.position.z));
+            
             gumballPreviousDistance = currentDistance;
         }
     }, false);
