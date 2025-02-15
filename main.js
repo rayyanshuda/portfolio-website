@@ -341,6 +341,17 @@ const gumballModelBox = document.getElementById('gumball-model-box');
 
 if (gumballModelBox) {
     gumballModelBox.appendChild(gumballRenderer.domElement);
+
+    const gumballAspectRatio = gumballModelBox.clientWidth / gumballModelBox.clientHeight;
+    gumballCamera.aspect = gumballAspectRatio;
+    gumballCamera.updateProjectionMatrix();
+    gumballRenderer.setSize(gumballModelBox.clientWidth, gumballModelBox.clientHeight);
+
+    setTimeout(() => {
+        gumballCamera.updateProjectionMatrix();
+        gumballRenderer.setSize(gumballModelBox.clientWidth, gumballModelBox.clientHeight);
+    }, 100);
+
     // Add lighting
     const gumballAmbientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
     gumballScene.add(gumballAmbientLight);
@@ -426,21 +437,21 @@ if (gumballModelBox) {
 */
 
 
-// Slideshow controls
-loadGumballModel(gumballCurrentModelIndex);
-document.querySelectorAll('.prev, .next').forEach(button => {
-    button.addEventListener('click', (event) => {
-        // Check which button was clicked by inspecting the target's ID or class
-        if (/*event.target.id === 'gumball-prev-btn' || */event.target.classList.contains('prev')) {
-            gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
-        } else if (/*event.target.id === 'gumball-next-btn' || */ event.target.classList.contains('next')) {
-            gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
-        }
-            
-        // Load the new model based on the updated index
-        loadGumballModel(gumballCurrentModelIndex);
+    // Slideshow controls
+    loadGumballModel(gumballCurrentModelIndex);
+    document.querySelectorAll('.prev, .next').forEach(button => {
+        button.addEventListener('click', (event) => {
+            // Check which button was clicked by inspecting the target's ID or class
+            if (/*event.target.id === 'gumball-prev-btn' || */event.target.classList.contains('prev')) {
+                gumballCurrentModelIndex = (gumballCurrentModelIndex - 1 + gumballModelFiles.length) % gumballModelFiles.length;
+            } else if (/*event.target.id === 'gumball-next-btn' || */ event.target.classList.contains('next')) {
+                gumballCurrentModelIndex = (gumballCurrentModelIndex + 1) % gumballModelFiles.length;
+            }
+                
+            // Load the new model based on the updated index
+            loadGumballModel(gumballCurrentModelIndex);
+        });
     });
-});
 
     // Mouse interaction
     let gumballIsDragging = false;
