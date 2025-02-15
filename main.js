@@ -600,17 +600,5 @@ window.onload = function () {
     }
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-    const video = document.getElementById("foodVideo");
 
-    // Try playing for 0.1 seconds and then pausing
-    video.play().then(() => {
-        setTimeout(() => {
-            video.pause();
-            video.currentTime = 0; // Ensure it resets
-        }, 100); // Pause after 100ms (a tiny fraction of a second)
-    }).catch(error => {
-        console.log("Autoplay failed:", error);
-    });
-});
 
