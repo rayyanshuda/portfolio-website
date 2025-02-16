@@ -259,7 +259,8 @@ if (modelBox) {
             camera.position.z -= deltaDistance * 0.01;
 
             // Apply zoom limits
-            gumballCamera.position.z = Math.max(1, Math.min(10, gumballCamera.position.z));
+            camera.position.z = Math.max(1, Math.min(10, camera.position.z));
+            //camera.position.z = Math.min(Math.max(camera.position.z, minZoom), maxZoom);
 
             previousDistance = currentDistance1;
         }
