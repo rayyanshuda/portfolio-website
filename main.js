@@ -257,6 +257,10 @@ if (modelBox) {
             );
             const deltaDistance = currentDistance1 - previousDistance;
             camera.position.z -= deltaDistance * 0.01;
+
+            // Apply zoom limits
+            gumballCamera.position.z = Math.max(1, Math.min(10, gumballCamera.position.z));
+
             previousDistance = currentDistance1;
         }
     }, false);
