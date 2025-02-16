@@ -195,17 +195,16 @@ if (modelBox) {
         const maxDimension = Math.max(size.x, size.y, size.z);
         const scale = 5 / maxDimension;
         model.scale.set(scale, scale, scale);
-
-        // Center model in the scene
-        const center = new THREE.Vector3();
-        boundingBox.getCenter(center);
-        model.position.sub(center);
+        
 
         scene.add(model);
 
-        // Adjust camera position for initial zoom
-        camera.position.set(0, 2, maxDimension * 2);
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        const center = new THREE.Vector3();
+        boundingBox.getCenter(center);
+
+        camera.position.copy(center);
+        camera.position.z = maxDimension * 9.5;
+        camera.lookAt(center);
     });
 
     // Mouse interaction
