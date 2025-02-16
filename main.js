@@ -152,17 +152,6 @@ const modelBox = document.getElementById('model-box');
 if (modelBox) {
     modelBox.appendChild(renderer.domElement);
 
-
-
-    const aspectRatio = modelBox.clientWidth / modelBox.clientHeight;
-    camera.aspect = aspectRatio;
-    camera.updateProjectionMatrix();
-    renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
-
-    setTimeout(() => {
-        camera.updateProjectionMatrix();
-        renderer.setSize(modelBox.clientWidth, modelBox.clientHeight);
-    }, 100);
     // Add lighting
     // Lighting Setup
     const ambientLight = new THREE.AmbientLight(0x999999, 1.5); // Brighter ambient light
@@ -207,14 +196,16 @@ if (modelBox) {
         const scale = 5 / maxDimension;
         model.scale.set(scale, scale, scale);
 
-        scene.add(model);
-
+        // Center model in the scene
         const center = new THREE.Vector3();
         boundingBox.getCenter(center);
+        model.position.sub(center);
 
-        camera.position.copy(center);
-        camera.position.z = maxDimension * 9.5;
-        camera.lookAt(center);
+        scene.add(model);
+
+        // Adjust camera position for initial zoom
+        camera.position.set(0, 2, maxDimension * 2);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
     });
 
     // Mouse interaction
