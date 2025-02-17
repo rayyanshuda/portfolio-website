@@ -154,6 +154,43 @@ h3 {
     font-size: 24px;
 }
 
+.scroll-icon {
+    margin: 70px auto; /* Adjust margin for better placement */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-icon .scroll-body {
+    display: flex;
+    width: 30px; /* Reduced width */
+    height: 60px; /* Reduced height */
+    border: 2px solid white; /* Thinner border */
+    border-radius: 20px; /* Adjusted border-radius */
+}
+
+.scroll-icon .scroll-body .scroller {
+    width: 18px; /* Smaller scroller */
+    height: 20px; /* Shorter height */
+    margin: 5px auto;
+    background-color: white;
+    border-radius: 10px;
+    animation: scrolling 2s ease-in-out infinite;
+}
+
+@keyframes scrolling {
+    0% {
+        margin: 5px auto;
+    }
+    40% {
+        margin: 30px auto; /* Adjusted to match smaller size */
+    }
+    100% {
+        margin: 5px auto;
+    }
+}
+
+
 strong {
     color: #ff004f;
 }
@@ -1084,6 +1121,14 @@ nav .fa-solid {
 
 @media only screen and (max-width: 600px) {    
 
+    .progress-bar {
+        display: none;
+    }
+
+    .scroll-icon {
+        display: none;
+    }
+
     .project-description {
         line-height: 40px;
         font-size: 16px;
@@ -1361,6 +1406,15 @@ nav .fa-solid {
 
 /* Tablets (601px to 1024px) */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
+
+    .progress-bar {
+        display: none;
+    }
+
+    .scroll-icon {
+        display: none;
+    }
+
     .logo {
         width: 75px;
         height: 75px;
