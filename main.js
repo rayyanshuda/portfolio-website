@@ -21,7 +21,9 @@ document.addEventListener("DOMContentLoaded", function() {
         "developer and designer",
         "Ferrari fanatic",
         "problem solver",
+        "UX Researcher",
         "avid gamer"
+        
     ];
 
     let currentIndex = 0;
