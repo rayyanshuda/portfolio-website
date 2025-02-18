@@ -1,3 +1,18 @@
+window.onload = function() {
+    document.getElementById("contact-form").reset();
+};
+document.addEventListener("DOMContentLoaded", function() {
+    const emailInput = document.getElementById("email");
+    const warningMessage = document.getElementById("email-warning");
+
+    emailInput.addEventListener("input", function() {
+        warningMessage.style.display = "block"; // Show warning when user types
+    });
+
+    emailInput.addEventListener("blur", function() {
+        warningMessage.style.display = "none"; // Hide warning when user leaves the field
+    });
+});
 // Tab functionality
 var tablinks = document.getElementsByClassName('tab-links');
 var tabcontents = document.getElementsByClassName('tab-contents');

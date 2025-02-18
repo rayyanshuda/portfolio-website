@@ -218,14 +218,14 @@
             </div>
             <div class="contact-right">
 
-                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" autocomplete="off">
+                <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
 
                     <!-- Replace with your Access Key -->
                     <input type="hidden" name="access_key" value="7c96112c-3c92-470e-b8a3-167695840565">
                 
-                    <input type="text" name="Name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
+                    <input type="text" name="Name" placeholder="Your Name" autocomplete="name" required>
+                    <input type="email" name="email" placeholder="Your Email" autocomplete="email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message" autocomplete="off" required></textarea>
                     
                 
                     <!-- Honeypot Spam Protection -->
@@ -244,9 +244,11 @@
     Designed & Developed by Rayyan Huda 🧡
   </footer>
 
+
 <script 
     src="main.js" defer>
 </script>
+
 
 </script>
 </div>
