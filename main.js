@@ -190,7 +190,7 @@ if (modelBox) {
     const loader = new THREE.STLLoader();
     let model;
 
-    loader.load('./images/cybertruck3D.stl', function (geometry) {
+    loader.load('/images/cybertruck3D.stl', function (geometry) {
         geometry.computeVertexNormals();
 
         const material = new THREE.MeshPhysicalMaterial({
@@ -391,12 +391,12 @@ if (gumballModelBox) {
     // Load STL files
     const gumballLoader = new THREE.STLLoader();
     const gumballModelFiles = [
-        './images/gumball-base.stl',
-        './images/gumball-container.STL',
-        './images/gumball-crank.STL',
-        './images/gumball-spinner.STL',
-        './images/gumball-head.STL',
-        './images/gumball-tail.STL'
+        '/images/gumball-base.stl',
+        '/images/gumball-container.STL',
+        '/images/gumball-crank.STL',
+        '/images/gumball-spinner.STL',
+        '/images/gumball-head.STL',
+        '/images/gumball-tail.STL'
 
     ];
 
