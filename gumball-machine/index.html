@@ -1,284 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rayyan Huda - gumball machine 3d assembly project, concept, struggles, and interactive models">
-    <meta name="keywords" content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development">
-    <meta name="author" content="Rayyan Huda">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Rayyan Huda - gumball machine 3d assembly project, concept, struggles, and interactive models"
+    />
+    <meta
+      name="keywords"
+      content="Portfolio, Rayyan Huda, Software Developer, Projects, Web Development"
+    />
+    <meta name="author" content="Rayyan Huda" />
     <title>Gumball Machine 3D Design | Rayyan Huda</title>
-    <link rel="icon" href="/images/favicon.png">
-    <link rel="stylesheet" href="/style.css"> <!-- Link to external CSS -->
+    <link rel="icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/style.css" />
+    <!-- Link to external CSS -->
     <!-- Three.js and STLLoader scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/STLLoader.js"></script>
-    <script src="/main.js" defer></script> <!-- Link to external JS -->
-    <script src="https://kit.fontawesome.com/54522e5b90.js" crossorigin="anonymous"></script>
+    <script src="/main.js" defer></script>
+    <!-- Link to external JS -->
+    <script
+      src="https://kit.fontawesome.com/54522e5b90.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
     </style>
-</head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-T65TB0XZ8Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-T65TB0XZ8Z"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
 
-  gtag('config', 'G-T65TB0XZ8Z');
-</script>
-<body>
-
+    gtag("config", "G-T65TB0XZ8Z");
+  </script>
+  <body>
     <div id="content">
-        <div class="progress-bar"></div>
-    <nav id="navbar">
+      <div class="progress-bar"></div>
+      <nav id="navbar">
         <div class="container2">
-            <a href="/" behavior="smooth">
-            <img src="/images/rh.webp" class="logo" alt="rayyan huda logo">
-            </a>
-            <ul id="sidemenu">
-                <li><a href="/about/">About</a></li>
-                <li><a href="/resume/external.pdf" target="_blank" rel="noopener noreferrer">Resume</a></li>
-            </ul>
-        </div>    
-    </nav>
+          <a href="/" behavior="smooth">
+            <img src="/images/rh.webp" class="logo" alt="rayyan huda logo" />
+          </a>
+          <ul id="sidemenu">
+            <li><a href="/about/">About</a></li>
+            <li>
+              <a
+                href="/resume/external.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Resume</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
     </div>
 
-
     <div id="project-content">
-        <div class="container">
-            <div class="heading">
-                <div class="project-title">
-                    <h1>
-                        <span>Gumball Machine Design</span>
-                        <br>
-                        SolidWorks 3D Assembly
-                    </h1>
-                </div>
-                <a href="https://github.com/rayyanshuda/gumball3D" target="_blank" rel="noopener noreferrer">
-                    <button class="view">View GitHub</button>
-                </a>
-            </div>
-            
-    
-            <div class="row">
-                <div class="project-description">
-                    <p>
-                        This is a 3D model designed and assembled in SolidWorks. It's made up of several components including the container, base, crank, spinner, head, and tail. This project is designed to be assembled using the instruction manual. Play around with the parts below!
-                    </p>
-                </div>
-                <div class="project-image">
+      <div class="container">
+        <div class="heading">
+          <div class="project-title">
+            <h1>
+              <span>Gumball Machine Design</span>
+              <br />
+              SolidWorks 3D Assembly
+            </h1>
+          </div>
+          <a
+            href="https://github.com/rayyanshuda/gumball3D"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button class="view">View GitHub</button>
+          </a>
+        </div>
 
-                    
+        <div class="row">
+          <div class="project-description">
+            <p>
+              This is a 3D model designed and assembled in SolidWorks. It's made
+              up of several components including the container, base, crank,
+              spinner, head, and tail. This project is designed to be assembled
+              using the instruction manual. Play around with the parts below!
+            </p>
+          </div>
+          <div class="project-image"></div>
+        </div>
 
-                </div>
-            </div>
+        <!-- Container for the 3D model -->
+        <div id="gumball-model-container">
+          <div id="gumball-caption">Initial caption</div>
+          <div id="gumball-model-box"></div>
+          <!-- Next and previous buttons -->
+          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+          <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
 
-            <!-- Container for the 3D model -->
-            <div id="gumball-model-container">
-                <div id="gumball-caption">Initial caption</div>
-                <div id="gumball-model-box"></div>
-                <!-- Next and previous buttons -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                
-                
-            </div>
-
-            
-
-            <!-- Slideshow controls 
+        <!-- Slideshow controls 
             <div class="gumball-slideshow-controls">
                 <button id="gumball-prev-btn" class="gumball-button">Previous</button>
                 <button id="gumball-next-btn" class="gumball-button">Next</button>
             </div>
             -->
-            <br>
-            
-            
-        </div>        
+        <br />
+      </div>
     </div>
-
 
     <div class="project-overview">
-        <div class="container">
-            <h2>Why This Project?</h2>
-            <div class="project-image">
-                <img id="gumball-gif" src="/images/gumball assembly.gif" alt="gumball machine assembly and collapse gif">
-            </div>
-            <p>
-                This was my second 3D modelling project. I had a lot of fun experimenting SolidWorks features on my Cybertruck Jeep model. Having learned a lot from my previous experience and wanting to try something more advanced, I was inspired by Lego assemblies. Instead of 3D printing the gumball machine, I designed separate parts that could be assembled to create a 3D gumball. This project was designed for a group project, to create a 3D model involving the motif of a Canadian animal. My group decided to design a gumball machine in the shape of a squirrel, hence the head and tail parts. Spanning over a month and a half, I enjoyed the process of creating something new, and learning about locking mechanisms to keep the different parts in place.
-            </p>
-    
-            <h2>Concept & Struggles</h2>
-            <div class="project-image">
-                <img id="gumball-gif" src="/images/gumball sketch.webp" alt="initial gumball machine concept idea">
-            </div>
-            <p>
-                The idea was a squirrel shaped gumball machine. Unscrewing the head will allow a gumball to be inserted into the body of the squirrel. The gumball will drop through the body into the container of the machine where it will be caught in the spinner. The crank will need to be spun to funnel the gumball out of the container and in the tail, where it enters the final stage of its journey, spiraling down and exiting out of the machine, when it can then be eaten.
-            </p>
-
-
-            <div class="collapsible-item">
-            
-                <!--container part-->
-                <button type="button" class="collapsible">Container</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Container</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/container draft model.webp" alt="initial container concept picture" style="margin-bottom: 15px;">
-                            <p id="concept-text">Initial Container Concept</p>
-                        </div>
-                        <p>
-                            The container served the purpose of funneling the ball from the spinner to the tail. The container was the main component of the build, mainly because the spinner, crank, body, and tail, needed to inserted. The original design of the container (picture above) had a tunnel that connected the entrance from the body opening to the exit that connected the tail, but we faced a lot of printing errors, resulting in the printer refusing to print our model. In theory, our idea would work, but it wasn't very practical in terms of printing, because there was nothing supporting the tunnel. We attempted to print the model multiple times, and it did print one time, but it was very difficult to remove the filling inside the tunnel. We devised a new idea, to guide the ball as it fell, and using its momentum to leave the container. This method proved to be much better, with the only downside being that it took a lot more ink to print, but it was more efficient and provided a smoother journey for the ball. You can view the inside of the container by zooming into the model above and adjusting the camera to see where and how the ball moves. 
-                        </p>
-                        
-                </div>
-                </div>
-    
-    
-                <!--body part-->
-                <button type="button" class="collapsible">Body</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Body</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/gumball body initial.webp" alt="initial body concept picture" style="margin-bottom: 15px;">
-                            <p id="concept-text">Initial Body Concept</p>
-                        </div>
-                        <p>
-                            The body of the gumball machine was to hold the balls before they can enter the spinner and go down the container. It's main aesthetic purpose was so that the squirrel would have a realistic body, similar to how squirrels save acorns in their mouth, this one saved gumballs in its stomach. It connected the head and the container and had two different locking mechanisms for each side, since the diameter of the head and the container were different. They were both a snap-fit locking mechanism, where the pieces had to be placed in their respective slots and rotated to lock so they wouldn't fall apart.
-                        </p>
-                        <p>
-                            The main struggle I faced with this part was designing the body proportions so it looked like a realistic squirrel. Initially, the plan was to hold multiple balls in the body, so we had kept the space open, and sized down the tunnel to the container, so all the balls don't fall in. We realized after assembly, that the body was either too small, or much larger than the rest of the pieces, so we scaled them to be visually authentic. 
-                        </p>
-                        <br>
-                        <h2>Struggles</h2>
-                        
-                </div>
-                </div>
-    
-                <!--crank part-->
-                <button type="button" class="collapsible">Crank</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Crank</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/gumball crank initial.webp" alt="initial crank concept picture" style="margin-bottom: 15px;">
-                            <p id="concept-text">Initial Crank Concept</p>
-                        </div>
-                        <p>
-                            The crank was fairly simple to design, with only a few sketches, extrudes, and fillets. The design behind it was to mimic a key, to enter the slot of the spinner so it can be turned. I added fillets to the handles for safety reassurance to avoid sharp edges. 
-                        </p>
-                        <p>
-                            Another issue with the spinner happened post printing. Although the crank and spinner fit in the original design, we underestimated the tolerance for fitting. We had initially kept it at 0.1 mm, but the crank still wouldn't fit into the spinner. It taught us a good lesson to check the tolerance for various 3D printers, since we used multiple printers and the fitting was inaccurate sometimes because they were printed from different machines. Sanding the crank down seemed to do the trick just fine. 
-                        </p>
-                        <br>
-                        <h2>Struggles</h2>
-                        
-                </div>
-                </div>
-
-                <!--spinner part-->
-                <button type="button" class="collapsible">Spinner</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Spinner</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/gumball spinner initial.webp" alt="initial spinner concept picture" style="margin-bottom: 15px;">
-                            <p id="concept-text">Initial Spinner Concept</p>
-                        </div>
-                        <p>
-                            The spinner had curved slots where it would hold the ball. With my limited knowledge of 3D modelling, I wasn't sure how I would design that. However, I was familiar with an extrude method to create a rectangular sketch and extrude cut it. To allow a smoother fit of the crank into the spinner, we decided to add chamfers in the slot for the spinner to ease its way in.
-                        </p>
-                        <p>
-                            Another issue with the spinner happened post printing. Although the crank and spinner fit in the original design, we underestimated the tolerance for fitting. We had initially kept it at 0.1 mm, but the crank still wouldn't fit into the spinner. It taught us a good lesson to check the tolerance for various 3D printers, since we used multiple printers and the fitting was inaccurate sometimes because they were printed from different machines. Sanding the crank down seemed to do the trick just fine, instead of printing the piece again. 
-                        </p>
-                        <br>
-                        <h2>Struggles</h2>
-                        
-                </div>
-                </div>
-
-                <!--head part-->
-                <button type="button" class="collapsible">Head</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Head</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/gumball head concept.webp" alt="initial head concept picture" style="margin-bottom: 15px">
-                            <p id="concept-text">Initial Head Concept</p>
-                        </div>
-                        <p>
-                            For the head, there was a lot of ideas of designing a face with ears, a nose, eyes, and a mouth, but we faced a lot of technical SolidWorks issues working on it. Initially, I wanted to sculpt a detailed face to give the model more personality, but SolidWorks' surface modeling tools were challenging to use effectively with my skill level at the time. I tried to use lofts and boundary surfaces to create smooth facial contours, but getting the transitions between the different features to blend naturally was difficult. The software would sometimes generate errors from self-intersecting surfaces, which made the process frustrating. We kept a simple design for the face to disregard these issues.
-                        </p>
-                        <p>
-                            Another significant issue was ensuring that the head could be securely attached and removed for refilling the gumball machine. The initial plan was to use a screw mechanism, but threading a cylindrical piece in SolidWorks required precision, and it was difficult to match the same pattern on the body to connect to the head. I considered using a snap-fit design instead, which would ensure it would remain secure and still be removable simplified our solution. Cutting a slot for the head to turn and snap into was the design and it worked out well, so simply lifting the head would not dislocate the piece, it would need a bit of maneuvering to remove. 
-                        </p>
-                        
-                </div>
-                </div>
-
-                <!--tail part-->
-                <button type="button" class="collapsible">Tail</button>
-                <div class="expand">
-                <div class="project-features">
-                        <h1>Container</h1>
-                        <h2>Concept / Struggles</h2>
-                        <div class="project-image">
-                            <img src="/images/gumball initial.webp" alt="initial tail concept picture" style="margin-bottom: 15px;">
-                            <p id="concept-text">Initial Tail Concept</p>
-                        </div>
-                        <p>
-                            In the concept sketch, the tail was inserted into the model at the back for decoration, and funneling out of the container would land the gumball outside. But to improve the contribution of each piece to the build, we decided to use the tail as a helix spiral to ramp the ball down. Next, near the end of the tail, you can see the top of the tail is uncovered. This was an adjustment we added after printing our draft pieces. When 3D printing, hollow pieces will be drawn with a filling inside. It was difficult to remove the filling with the entire tail covered. Leaving a portion of the top uncovered didn't compromise the design and allowed us to take some pliers and pull the filling out. 
-                        </p>
-                        
-                </div>
-                </div>
-    
-            </div>
-    
-            <h2>What did I learn?</h2>
-    
-            <div class="project-image">
-                <video controls muted playsinline preload="auto" class="gumball-video" title="gumball demonstration assembly video" src="/images/gumball-demonstration.mp4" type="video/mp4" controlslist="nodownload"></video>
-            </div>
-            <p>
-                This project taught me lessons in 3D modeling, problem-solving, and practical design adjustments. A crucial challenge was learning to navigate SolidWorks' surface modeling tools, as sculpting organic shapes like a squirrel's face often resulted in self-intersecting surfaces, broken constraints, and undefined sketches. Designing smooth transitions between the ears, nose, and head required multiple iterations, and even small modifications sometimes caused unexpected errors in the model tree. Another difficulty was managing complex assemblies, making sure that different components, such as the head, body, and container, fit together without interference while still allowing for proper movement. 
-            </p>    
-            <p>    
-                Tolerance issues became apparent after printing, as even small discrepancies between 3D printers affected how the crank fit into the spinner and how the body fit in the head and the container, teaching me the importance of accounting for material shrinkage and printer variability. Additionally, creating functional mechanisms like snap-fit joints and rotating parts required precise alignment, and I had to experiment with different clearances to ensure they worked correctly without being too tight or too loose. The initial design of the container failed multiple times due to unsupported tunnels, leading to printing errors and difficulties removing internal supports, forcing us to rethink and redesign our approach. 
-            </p>
-            <p>
-                Learning how to create a helical ramp for the tail was another challenge, as SolidWorks' helix tools can be unintuitive, and aligning it with the rest of the model required careful constraint management. File organization also became an issue, as a project with multiple interdependent parts required a structured approach to avoid broken references when making changes, and working on multiple iterations of different parts made it difficult to keep track of the most updated versions. These challenges taught me the importance of iterative prototyping, careful planning, problem-solving around technical and design issues, and adapting to real-world limitations, ultimately making this a project that I'm proud to display to the world, showing my abilities in 3D modelling.
-            </p>
-    
-            <p>
-                To showcase my learning, you can interact with my gumball machine model above and view all SolidWorks parts and assembly instructions on my GitHub.
-            </p>
-    
+      <div class="container">
+        <h2>Why This Project?</h2>
+        <div class="project-image">
+          <img
+            id="gumball-gif"
+            src="/images/gumball assembly.gif"
+            alt="gumball machine assembly and collapse gif"
+          />
         </div>
-    </div>
-    
-      
+        <p>
+          This was my second 3D modelling project. I had a lot of fun
+          experimenting SolidWorks features on my Cybertruck Jeep model. Having
+          learned a lot from my previous experience and wanting to try something
+          more advanced, I was inspired by Lego assemblies. Instead of 3D
+          printing the gumball machine, I designed separate parts that could be
+          assembled to create a 3D gumball. This project was designed for a
+          group project, to create a 3D model involving the motif of a Canadian
+          animal. My group decided to design a gumball machine in the shape of a
+          squirrel, hence the head and tail parts. Spanning over a month and a
+          half, I enjoyed the process of creating something new, and learning
+          about locking mechanisms to keep the different parts in place.
+        </p>
 
-    
+        <h2>Concept & Struggles</h2>
+        <div class="project-image">
+          <img
+            id="gumball-gif"
+            src="/images/gumball sketch.webp"
+            alt="initial gumball machine concept idea"
+          />
+        </div>
+        <p>
+          The idea was a squirrel shaped gumball machine. Unscrewing the head
+          will allow a gumball to be inserted into the body of the squirrel. The
+          gumball will drop through the body into the container of the machine
+          where it will be caught in the spinner. The crank will need to be spun
+          to funnel the gumball out of the container and in the tail, where it
+          enters the final stage of its journey, spiraling down and exiting out
+          of the machine, when it can then be eaten.
+        </p>
+
+        <div class="collapsible-item">
+          <!--container part-->
+          <button type="button" class="collapsible">Container</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Container</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/container draft model.webp"
+                  alt="initial container concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Container Concept</p>
+              </div>
+              <p>
+                The container served the purpose of funneling the ball from the
+                spinner to the tail. The container was the main component of the
+                build, mainly because the spinner, crank, body, and tail, needed
+                to inserted. The original design of the container (picture
+                above) had a tunnel that connected the entrance from the body
+                opening to the exit that connected the tail, but we faced a lot
+                of printing errors, resulting in the printer refusing to print
+                our model. In theory, our idea would work, but it wasn't very
+                practical in terms of printing, because there was nothing
+                supporting the tunnel. We attempted to print the model multiple
+                times, and it did print one time, but it was very difficult to
+                remove the filling inside the tunnel. We devised a new idea, to
+                guide the ball as it fell, and using its momentum to leave the
+                container. This method proved to be much better, with the only
+                downside being that it took a lot more ink to print, but it was
+                more efficient and provided a smoother journey for the ball. You
+                can view the inside of the container by zooming into the model
+                above and adjusting the camera to see where and how the ball
+                moves.
+              </p>
+            </div>
+          </div>
+
+          <!--body part-->
+          <button type="button" class="collapsible">Body</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Body</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/gumball body initial.webp"
+                  alt="initial body concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Body Concept</p>
+              </div>
+              <p>
+                The body of the gumball machine was to hold the balls before
+                they can enter the spinner and go down the container. It's main
+                aesthetic purpose was so that the squirrel would have a
+                realistic body, similar to how squirrels save acorns in their
+                mouth, this one saved gumballs in its stomach. It connected the
+                head and the container and had two different locking mechanisms
+                for each side, since the diameter of the head and the container
+                were different. They were both a snap-fit locking mechanism,
+                where the pieces had to be placed in their respective slots and
+                rotated to lock so they wouldn't fall apart.
+              </p>
+              <p>
+                The main struggle I faced with this part was designing the body
+                proportions so it looked like a realistic squirrel. Initially,
+                the plan was to hold multiple balls in the body, so we had kept
+                the space open, and sized down the tunnel to the container, so
+                all the balls don't fall in. We realized after assembly, that
+                the body was either too small, or much larger than the rest of
+                the pieces, so we scaled them to be visually authentic.
+              </p>
+            </div>
+          </div>
+
+          <!--crank part-->
+          <button type="button" class="collapsible">Crank</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Crank</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/gumball crank initial.webp"
+                  alt="initial crank concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Crank Concept</p>
+              </div>
+              <p>
+                The crank was fairly simple to design, with only a few sketches,
+                extrudes, and fillets. The design behind it was to mimic a key,
+                to enter the slot of the spinner so it can be turned. I added
+                fillets to the handles for safety reassurance to avoid sharp
+                edges.
+              </p>
+              <p>
+                Another issue with the spinner happened post printing. Although
+                the crank and spinner fit in the original design, we
+                underestimated the tolerance for fitting. We had initially kept
+                it at 0.1 mm, but the crank still wouldn't fit into the spinner.
+                It taught us a good lesson to check the tolerance for various 3D
+                printers, since we used multiple printers and the fitting was
+                inaccurate sometimes because they were printed from different
+                machines. Sanding the crank down seemed to do the trick just
+                fine.
+              </p>
+            </div>
+          </div>
+
+          <!--spinner part-->
+          <button type="button" class="collapsible">Spinner</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Spinner</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/gumball spinner initial.webp"
+                  alt="initial spinner concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Spinner Concept</p>
+              </div>
+              <p>
+                The spinner had curved slots where it would hold the ball. With
+                my limited knowledge of 3D modelling, I wasn't sure how I would
+                design that. However, I was familiar with an extrude method to
+                create a rectangular sketch and extrude cut it. To allow a
+                smoother fit of the crank into the spinner, we decided to add
+                chamfers in the slot for the spinner to ease its way in.
+              </p>
+              <p>
+                Another issue with the spinner happened post printing. Although
+                the crank and spinner fit in the original design, we
+                underestimated the tolerance for fitting. We had initially kept
+                it at 0.1 mm, but the crank still wouldn't fit into the spinner.
+                It taught us a good lesson to check the tolerance for various 3D
+                printers, since we used multiple printers and the fitting was
+                inaccurate sometimes because they were printed from different
+                machines. Sanding the crank down seemed to do the trick just
+                fine, instead of printing the piece again.
+              </p>
+            </div>
+          </div>
+
+          <!--head part-->
+          <button type="button" class="collapsible">Head</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Head</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/gumball head concept.webp"
+                  alt="initial head concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Head Concept</p>
+              </div>
+              <p>
+                For the head, there was a lot of ideas of designing a face with
+                ears, a nose, eyes, and a mouth, but we faced a lot of technical
+                SolidWorks issues working on it. Initially, I wanted to sculpt a
+                detailed face to give the model more personality, but
+                SolidWorks' surface modeling tools were challenging to use
+                effectively with my skill level at the time. I tried to use
+                lofts and boundary surfaces to create smooth facial contours,
+                but getting the transitions between the different features to
+                blend naturally was difficult. The software would sometimes
+                generate errors from self-intersecting surfaces, which made the
+                process frustrating. We kept a simple design for the face to
+                disregard these issues.
+              </p>
+              <p>
+                Another significant issue was ensuring that the head could be
+                securely attached and removed for refilling the gumball machine.
+                The initial plan was to use a screw mechanism, but threading a
+                cylindrical piece in SolidWorks required precision, and it was
+                difficult to match the same pattern on the body to connect to
+                the head. I considered using a snap-fit design instead, which
+                would ensure it would remain secure and still be removable
+                simplified our solution. Cutting a slot for the head to turn and
+                snap into was the design and it worked out well, so simply
+                lifting the head would not dislocate the piece, it would need a
+                bit of maneuvering to remove.
+              </p>
+            </div>
+          </div>
+
+          <!--tail part-->
+          <button type="button" class="collapsible">Tail</button>
+          <div class="expand">
+            <div class="project-features">
+              <h1>Container</h1>
+              <h2>Concept / Struggles</h2>
+              <div class="project-image">
+                <img
+                  src="/images/gumball initial.webp"
+                  alt="initial tail concept picture"
+                  style="margin-bottom: 15px"
+                />
+                <p id="concept-text">Initial Tail Concept</p>
+              </div>
+              <p>
+                In the concept sketch, the tail was inserted into the model at
+                the back for decoration, and funneling out of the container
+                would land the gumball outside. But to improve the contribution
+                of each piece to the build, we decided to use the tail as a
+                helix spiral to ramp the ball down. Next, near the end of the
+                tail, you can see the top of the tail is uncovered. This was an
+                adjustment we added after printing our draft pieces. When 3D
+                printing, hollow pieces will be drawn with a filling inside. It
+                was difficult to remove the filling with the entire tail
+                covered. Leaving a portion of the top uncovered didn't
+                compromise the design and allowed us to take some pliers and
+                pull the filling out.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <h2>What did I learn?</h2>
+
+        <div class="project-image">
+          <video
+            controls
+            muted
+            playsinline
+            preload="auto"
+            class="gumball-video"
+            title="gumball demonstration assembly video"
+            src="/images/gumball-demonstration.mp4"
+            type="video/mp4"
+            controlslist="nodownload"
+          ></video>
+        </div>
+        <p>
+          This project taught me lessons in 3D modeling, problem-solving, and
+          practical design adjustments. A crucial challenge was learning to
+          navigate SolidWorks' surface modeling tools, as sculpting organic
+          shapes like a squirrel's face often resulted in self-intersecting
+          surfaces, broken constraints, and undefined sketches. Designing smooth
+          transitions between the ears, nose, and head required multiple
+          iterations, and even small modifications sometimes caused unexpected
+          errors in the model tree. Another difficulty was managing complex
+          assemblies, making sure that different components, such as the head,
+          body, and container, fit together without interference while still
+          allowing for proper movement.
+        </p>
+        <p>
+          Tolerance issues became apparent after printing, as even small
+          discrepancies between 3D printers affected how the crank fit into the
+          spinner and how the body fit in the head and the container, teaching
+          me the importance of accounting for material shrinkage and printer
+          variability. Additionally, creating functional mechanisms like
+          snap-fit joints and rotating parts required precise alignment, and I
+          had to experiment with different clearances to ensure they worked
+          correctly without being too tight or too loose. The initial design of
+          the container failed multiple times due to unsupported tunnels,
+          leading to printing errors and difficulties removing internal
+          supports, forcing us to rethink and redesign our approach.
+        </p>
+        <p>
+          Learning how to create a helical ramp for the tail was another
+          challenge, as SolidWorks' helix tools can be unintuitive, and aligning
+          it with the rest of the model required careful constraint management.
+          File organization also became an issue, as a project with multiple
+          interdependent parts required a structured approach to avoid broken
+          references when making changes, and working on multiple iterations of
+          different parts made it difficult to keep track of the most updated
+          versions. These challenges taught me the importance of iterative
+          prototyping, careful planning, problem-solving around technical and
+          design issues, and adapting to real-world limitations, ultimately
+          making this a project that I'm proud to display to the world, showing
+          my abilities in 3D modelling.
+        </p>
+
+        <p>
+          To showcase my learning, you can interact with my gumball machine
+          model above and view all SolidWorks parts and assembly instructions on
+          my GitHub.
+        </p>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer>
-        Copyright &copy 2024. All rights reserved. <br>
-        Designed & Developed by Rayyan Huda 🧡
+      Copyright &copy 2024. All rights reserved. <br />
+      Designed & Developed by Rayyan Huda 🧡
     </footer>
-
-</body>
+  </body>
 </html>
